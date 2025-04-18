@@ -10,6 +10,7 @@ function SidebarMenu() {
         <div className="d-flex flex-column bg-dark text-white vh-100 p-3" style={{ width: '250px' }}>
             <div className="fs-4 fw-bold mb-4 border-bottom pb-2">CORE SYSTEM</div>
             <ul className="nav nav-pills flex-column">
+
                 {menuItems.map((item, index) => (
                     <li className="nav-item" key={index}>
                         <a href="#" className="nav-link text-white">
