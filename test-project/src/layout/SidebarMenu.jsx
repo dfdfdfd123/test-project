@@ -3,7 +3,7 @@ import { Home, LogOut } from "lucide-react";
 function SidebarMenu() {
 
     const menuItems = [
-        "기준정보", "영업 / 견적관리", "실행관리", "계약관리", "구매관리", "재고관리", "전자결재", "그룹웨어", "시스템관리"
+        "주문", "출고", "재고관리", "제품단가", "대리점취급품목", "test", "test2", "test3", "test4"
     ];
 
     return (

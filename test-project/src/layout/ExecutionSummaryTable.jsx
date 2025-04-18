@@ -10,9 +10,9 @@ function ExecutionSummaryTable() {
       <table className="table table-bordered mt-3">
         <thead className="table-light">
         <tr>
-          <th>PJT Code</th>
-          <th>계약업체</th>
-          <th>계약명</th>
+          <th>주문번호</th>
+          <th>주문업체</th>
+          <th>주문명</th>
         </tr>
         </thead>
         <tbody>
