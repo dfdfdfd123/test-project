@@ -1,18 +1,18 @@
 function ExecutionSummaryTable() {
   const rows = [
-    { code: '25-001', company: 'POSCO 포항', name: '포) 전기시험실 절연유 테스트 자동화' },
-    { code: '25-002', company: 'POSCO', name: '포) 제철 3고로 TLC Weight' },
-    { code: '25-003', company: 'POSCO', name: '포) 제강 공정분석센터' },
-    { code: '25-004', company: 'POSCO', name: '포) 전기강판 3ACL 시편인출 자동화' },
+    { code: '25-001', company: '서울 강남점', name: '트위드 재킷' },
+    { code: '25-002', company: '부산 해운대점', name: '클래식 플랩 백' },
+    { code: '25-003', company: '부산 서면점', name: '코코 크롭 셋업' },
+    { code: '25-004', company: '서울 강서점', name: '진주 버튼 원피스' },
   ];
 
   return (
-      <table className="table table-bordered mt-3">
-        <thead className="table-light">
+      <table className="table table-bordered mt-5">
+        <thead className="table-info">
         <tr>
-          <th>PJT Code</th>
-          <th>계약업체</th>
-          <th>계약명</th>
+          <th>가맹점 Code</th>
+          <th>발주점</th>
+          <th>발주명</th>
         </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@ function ExecutionSummaryTable() {
   );
 }
 
-// ApprovalModal.tsx
+
 export function ApprovalModal() {
   return (
       <div className="modal show d-block" tabIndex={-1} role="dialog">
@@ -42,17 +42,17 @@ export function ApprovalModal() {
               <table className="table table-bordered">
                 <tbody>
                 <tr>
-                  <th>PJT Code</th>
+                  <th>가맹점 Code</th>
                   <td>25-001</td>
-                  <th>PJT 명</th>
+                  <th>발주명</th>
                   <td>포) 전기시험실 절연유 테스트 자동화</td>
                 </tr>
                 <tr>
-                  <th>계약업체</th>
-                  <td colSpan={3}>POSCO 포항</td>
+                  <th>발주점</th>
+                  <td colSpan={3}>트위드 재킷</td>
                 </tr>
                 <tr>
-                  <th>계약기간</th>
+                  <th>일자</th>
                   <td colSpan={3}>2025-02-10 ~ 2025-05-13</td>
                 </tr>
                 <tr>

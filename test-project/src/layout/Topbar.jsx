@@ -8,25 +8,27 @@ function Topbar() {
                         <span
                             className="px-3 py-1 fw-bold"
                             style={{
-                                backgroundColor: '#ffffff',  // 흰색 배경
-                                color: '#333',               // 어두운 텍스트 색상
+                                backgroundColor: '#ffffff',
+                                color: '#333',
                                 borderTopLeftRadius: '5px',
                                 borderTopRightRadius: '5px',
-                                border: '1px solid white',   // 연한 테두리 (선택)
-                                height: "52px",
+                                border: '1px solid white',
+                                height: "42px",
                                 fontSize: '14px',
                                 display: 'inline-block',
                                 borderBottom: 'none',
+                                marginTop: '15px'
                             }}
                         >
-              계약실적관리
+              대리점 발주 내역 확인
             </span>
 
 
             <div className="d-flex align-items-center gap-3">
-                <span className="fw-bold text-primary">홍길동 님</span>
-                <Home className="me-2 cursor-pointer text-primary"/>
-                <LogOut className="cursor-pointer text-primary"/>
+                <span  className="me-2 text-white">LOGOUT</span>
+                <span className="fw-bold text-white">홍길동 님</span>
+                <Home className="me-2 cursor-pointer text-white"/>
+                <LogOut className="cursor-pointer text-white"/>
             </div>
         </nav>
     )
