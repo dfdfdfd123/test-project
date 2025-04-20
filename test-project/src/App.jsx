@@ -22,7 +22,7 @@ function App() {
 
                 {/* 상단 제목 및 위치 정보 */}
                 <div className="bg-white border-bottom py-2 px-4">
-                    <h5 className="fw-bold mb-1">계약실적관리</h5>
+                    {/*<h5 className="fw-bold mb-1">계약실적관리</h5>*/}
                     <div className="text-muted small">☆ 계약관리 &gt; 계약실적관리</div>
                 </div>
 
