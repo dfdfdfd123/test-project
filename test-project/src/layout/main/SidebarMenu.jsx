@@ -4,7 +4,7 @@ import { Home, LogOut } from "lucide-react";
 function SidebarMenu() {
 
     const menuItems = [
-        "기준정보", "가맹점관리", "입고관리", "발주관리", "재고관리", "출고관리", "제품단가정보", "매출관리"
+        "발주관리", "대리점관리"
     ];
 
     return (

@@ -1,9 +1,9 @@
 function ExecutionSummaryTable() {
   const rows = [
-    { code: '25-001', company: '서울 강남점', name: '트위드 재킷' },
-    { code: '25-002', company: '부산 해운대점', name: '클래식 플랩 백' },
-    { code: '25-003', company: '부산 서면점', name: '코코 크롭 셋업' },
-    { code: '25-004', company: '서울 강서점', name: '진주 버튼 원피스' },
+    { code: '25-001', company: '서울 강남점', name: '트위드 재킷', status: '결제' },
+    { code: '25-002', company: '부산 해운대점', name: '클래식 플랩 백', status: '반려' },
+    { code: '25-003', company: '부산 서면점', name: '코코 크롭 셋업', status: '결제' },
+    { code: '25-004', company: '서울 강서점', name: '진주 버튼 원피스', status: '반려' },
   ];
 
   return (
@@ -13,6 +13,7 @@ function ExecutionSummaryTable() {
           <th>가맹점 Code</th>
           <th>발주점</th>
           <th>발주명</th>
+          <th>결제 상태</th>
         </tr>
         </thead>
         <tbody>
@@ -21,6 +22,7 @@ function ExecutionSummaryTable() {
               <td>{row.code}</td>
               <td>{row.company}</td>
               <td>{row.name}</td>
+              <td>{row.status}</td>
             </tr>
         ))}
         </tbody>

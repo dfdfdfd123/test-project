@@ -16,12 +16,16 @@ function MainInfoPanel() {
           <thead className="table-light">
           <tr>
             <th>가맹점 Code</th>
-            <th>PJT 유형</th>
-            <th>발주명</th>
+            <th>지점명</th>
+            <th>주문번호</th>
+            <th>일자</th>
+            <th>주문현황</th>
           </tr>
           </thead>
           <tbody>
           <tr>
+            <td>-</td>
+            <td>-</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
