@@ -1,9 +1,9 @@
-import ExecutionSummaryTable, {ApprovalModal} from "./layout/ExecutionSummaryTable.jsx";
-import MainInfoPanel from "./layout/MainInfoPanel.jsx";
-import FilterPanel from "./layout/FilterPanel.jsx";
-import SidebarMenu from "./layout/SidebarMenu.jsx";
+import ExecutionSummaryTable, {ApprovalModal} from "./layout/main/ExecutionSummaryTable.jsx";
+import MainInfoPanel from "./layout/main/MainInfoPanel.jsx";
+import FilterPanel from "./layout/main/FilterPanel.jsx";
+import SidebarMenu from "./layout/main/SidebarMenu.jsx";
 // import {useState} from "react";
-import Topbar from "./layout/Topbar.jsx";
+import Topbar from "./layout/main/Topbar.jsx";
 
 
 function App() {

@@ -9,7 +9,7 @@ function SidebarMenu() {
 
     return (
         <div className="d-flex flex-column text-white vh-100 p-3" style={{width: '250px', backgroundColor: '#343a40'}}>
-            <div className="fs-4 fw-bold mb-4 border-bottom pb-2" style={{height: '75px'}}>CORE SYSTEM</div>
+            <div className="fs-4 fw-bold mb-4 border-bottom pb-2" style={{height: '75px'}}>사이트 제목</div>
 
             <div className="mb-4">
                 <div className="small text-white text-center">2025.04.10</div>
