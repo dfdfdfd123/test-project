@@ -9,11 +9,11 @@ function SidebarMenu() {
 
     return (
         <div className="d-flex flex-column text-white vh-100 p-3" style={{width: '250px', backgroundColor: '#343a40'}}>
-            <div className="fs-4 fw-bold mb-4 border-bottom pb-2" style={{height: '75px'}}>사이트 제목</div>
+            <div className="fs-4 fw-bold mb-4 border-bottom pb-2" style={{height: '75px'}}>OrderNet</div>
 
             <div className="mb-4">
-                <div className="small text-white text-center">2025.04.10</div>
-                <div className="fw-bold border-bottom text-center pb-4">12:24:05</div>
+                <div className="small text-white text-center fs-2">2025.04.10</div>
+                <div className="fw-bold border-bottom text-center pb-4 fs-2">12:24:05</div>
             </div>
 
             <ul className="nav nav-pills flex-column">
