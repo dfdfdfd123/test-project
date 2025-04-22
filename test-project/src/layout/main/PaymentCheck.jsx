@@ -11,8 +11,8 @@ function PaymentCheck() {
         <thead className="table-info">
         <tr>
           <th>가맹점 Code</th>
-          <th>발주점</th>
-          <th>발주명</th>
+          <th>가맹점</th>
+          <th>가맹점명</th>
           <th>결제 상태</th>
         </tr>
         </thead>

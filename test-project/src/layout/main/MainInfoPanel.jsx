@@ -39,67 +39,96 @@ function MainInfoPanel() {
         <table className="table table-bordered">
           <thead className="table-info">
           <tr>
-            <th className="text-center align-middle" rowSpan="2" style={{ width: '150px', height: '60px' }}>항목</th>
-            <th className="text-center" colSpan="2">발주내역</th>
-            <th className="text-center" colSpan="2">실행대비 완료내역</th>
+            <th className="text-center" style={{width: '130px', height: '60px'}}></th>
+            <th className="text-center align-middle" colSpan="3">계약 정보</th>
+            <th className="text-center align-middle" colSpan="3">비용</th>
+            <th  className="text-center align-middle" style={{width: '130px'}}>절감액</th>
+            <th  className="text-center align-middle" style={{width: '130px'}}>절감율</th>
           </tr>
           <tr>
-            <th className="text-center" style={{width: '130px'}}>금액(원)</th>
-            <th className="text-center" style={{width: '130px'}}>%</th>
-            <th className="text-center" style={{width: '130px'}}>차액(원)</th>
-            <th className="text-center" style={{width: '130px'}}>절감률(%)</th>
+            <th className="text-center align-middle" style={{width: '130px', height: '60px'}}>항목</th>
+            <th className="text-center align-middle" style={{width: '130px'}}>계약 단가</th>
+            <th className="text-center align-middle" style={{width: '130px'}}>예상 수량</th>
+            <th className="text-center align-middle" style={{width: '130px'}}>예상 비용</th>
+            <th className="text-center align-middle" style={{width: '130px'}}>실제 단가</th>
+            <th className="text-center align-middle" style={{width: '130px'}}>실제 수량</th>
+            <th className="text-center align-middle" style={{width: '130px'}}>실제 비용</th>
+            <th className="text-center align-middle" style={{width: '130px'}}></th>
+            <th className="text-center align-middle" style={{width: '130px'}}></th>
           </tr>
           </thead>
           <tbody>
           <tr>
-            <td>직접원가</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
-          </tr>
-          <tr>
-            <td className="ps-4">ㄴ 재료비</td>
+            <td>-</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
           </tr>
           <tr>
-            <td className="ps-4">ㄴ 인건비</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
-          </tr>
-          <tr>
-            <td className="ps-4">ㄴ 장비</td>
+            <td>-</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
           </tr>
           <tr>
-            <td>간접원가</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
-          </tr>
-          <tr className="table-info fw-bold">
-            <td>합계</td>
+            <td>-</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
             <td>-</td>
           </tr>
-          <tr className="table-primary">
-            <td>순이익</td>
-            <td >-</td>
-            <td >-</td>
+          <tr>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
             <td>-</td>
             <td>-</td>
           </tr>
+          <tr>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          {/*<tr className="table-info fw-bold">*/}
+          {/*<td>합계</td>*/}
+          {/*  <td>-</td>*/}
+          {/*  <td>-</td>*/}
+          {/*  <td>-</td>*/}
+          {/*  <td>-</td>*/}
+          {/*  <td>-</td>*/}
+          {/*</tr>*/}
+          {/*<tr className="table-primary">*/}
+          {/*  <td>순이익</td>*/}
+          {/*  <td>-</td>*/}
+          {/*  <td>-</td>*/}
+          {/*  <td>-</td>*/}
+          {/*  <td>-</td>*/}
+          {/*  <td>-</td>*/}
+          {/*</tr>*/}
           </tbody>
         </table>
     <div className="mt-3 text-end">

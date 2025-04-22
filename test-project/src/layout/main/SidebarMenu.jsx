@@ -4,12 +4,13 @@ import { Home, LogOut } from "lucide-react";
 function SidebarMenu() {
 
     const menuItems = [
-        "발주관리", "대리점관리"
+        "발주확정", "발주내역", "대리점관리"
     ];
 
     return (
         <div className="d-flex flex-column text-white vh-100 p-3" style={{width: '250px', backgroundColor: '#343a40'}}>
-            <div className="fs-4 fw-bold mb-4 border-bottom pb-2" style={{height: '75px'}}>OrderNet</div>
+            <div className="fs-1 fw-bold mb-4 border-bottom pb-2 text-center" style={{height: '75px', whiteSpace: 'nowrap'}}>Order Net</div>
+
 
             <div className="mb-4">
                 <div className="small text-white text-center fs-2">2025.04.10</div>
