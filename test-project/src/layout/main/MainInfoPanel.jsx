@@ -1,4 +1,4 @@
-import {ApprovalModal} from "./ExecutionSummaryTable.jsx";
+import {ApprovalModal} from "./PaymentCheck.jsx";
 import {useState} from "react";
 
 function MainInfoPanel() {

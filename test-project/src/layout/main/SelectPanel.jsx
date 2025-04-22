@@ -1,4 +1,4 @@
-function FilterPanel() {
+function SelectPanel() {
     return (
         <div>
 
@@ -54,4 +54,4 @@ function FilterPanel() {
 }
 
 
-export default FilterPanel
+export default SelectPanel

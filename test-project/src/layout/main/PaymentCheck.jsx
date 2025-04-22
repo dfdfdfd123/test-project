@@ -1,4 +1,4 @@
-function ExecutionSummaryTable() {
+function PaymentCheck() {
   const rows = [
     { code: '25-001', company: '서울 강남점', name: '트위드 재킷', status: '결제' },
     { code: '25-002', company: '부산 해운대점', name: '클래식 플랩 백', status: '반려' },
@@ -78,4 +78,4 @@ export function ApprovalModal() {
   );
 }
 
-export default ExecutionSummaryTable
+export default PaymentCheck

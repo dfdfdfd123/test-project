@@ -1,6 +1,6 @@
-import ExecutionSummaryTable, {ApprovalModal} from "./layout/main/ExecutionSummaryTable.jsx";
+import PaymentCheck, {ApprovalModal} from "./layout/main/PaymentCheck.jsx";
 import MainInfoPanel from "./layout/main/MainInfoPanel.jsx";
-import FilterPanel from "./layout/main/FilterPanel.jsx";
+import SelectPanel from "./layout/main/SelectPanel.jsx";
 import SidebarMenu from "./layout/main/SidebarMenu.jsx";
 // import {useState} from "react";
 import Topbar from "./layout/main/Topbar.jsx";
@@ -14,9 +14,9 @@ function App() {
             <div className="flex-grow-1 d-flex flex-column overflow-hidden">
                 <Topbar />
                 <div className="p-3 overflow-auto" style={{ height: "calc(100vh - 120px)" }}>
-                    <FilterPanel />
+                    <SelectPanel />
                     <MainInfoPanel />
-                    <ExecutionSummaryTable />
+                    <PaymentCheck />
                 </div>
             </div>
         </div>
