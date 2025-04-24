@@ -26,18 +26,19 @@ function SelectPanel() {
                 </label>
 
                 <label className="d-flex align-items-center flex-nowrap">
+                    <span className="fw-bold me-2" style={{whiteSpace: 'nowrap'}}>● 일자</span>
+                    <input type="date" className="form-control flex-shrink-1" style={{minWidth: '120px'}}/>
+                    <span className="mx-2">~</span>
+                    <input type="date" className="form-control flex-shrink-1 ms-1" style={{minWidth: '120px'}}/>
+                </label>
+
+                <label className="d-flex align-items-center flex-nowrap">
                     <span className="fw-bold me-2" style={{whiteSpace: 'nowrap'}}>● 주문번호</span>
                     <select className="form-select flex-shrink-1" style={{minWidth: '100px'}}>
                         <option>주문번호</option>
                     </select>
                 </label>
 
-                <label className="d-flex align-items-center flex-nowrap">
-                    <span className="fw-bold me-2" style={{whiteSpace: 'nowrap'}}>● 일자</span>
-                    <input type="date" className="form-control flex-shrink-1" style={{minWidth: '120px'}}/>
-                    <span className="mx-2">~</span>
-                    <input type="date" className="form-control flex-shrink-1 ms-1" style={{minWidth: '120px'}}/>
-                </label>
 
                 <label className="d-flex align-items-center flex-nowrap">
                     <span className="fw-bold me-2" style={{whiteSpace: 'nowrap'}}>● 주문현황</span>
