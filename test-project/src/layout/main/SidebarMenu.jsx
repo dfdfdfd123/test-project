@@ -4,7 +4,7 @@ import { Home, LogOut } from "lucide-react";
 function SidebarMenu() {
 
     const menuItems = [
-        "발주확정", "발주내역", "대리점관리"
+        "주문 확정", "대리점 리스트", "재고현황"
     ];
 
     return (
