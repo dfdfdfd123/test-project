@@ -1,32 +1,36 @@
 function PaymentCheck() {
   const rows = [
-    { code: '25-001', company: '서울 강남점', name: '트위드 재킷', status: '결제' },
-    { code: '25-002', company: '부산 해운대점', name: '클래식 플랩 백', status: '반려' },
-    { code: '25-003', company: '부산 서면점', name: '코코 크롭 셋업', status: '결제' },
-    { code: '25-004', company: '서울 강서점', name: '진주 버튼 원피스', status: '반려' },
+    { orderId: '25-001', date: '2024-04-20', name: '엔진', status: '결제' },
+    { orderId: '25-002', date: '2024-04-20', name: '사이드 미러', status: '반려' },
+    { orderId: '25-003', date: '2024-04-20', name: '엔진', status: '결제' },
+    { orderId: '25-004', date: '2024-04-20', name: '사이드 미러', status: '반려' },
+
   ];
 
   return (
-      <table className="table table-bordered mt-5">
-        <thead className="table-info">
-        <tr>
-          <th>가맹점 Code</th>
-          <th>가맹점</th>
-          <th>가맹점명</th>
-          <th>결제 상태</th>
-        </tr>
-        </thead>
-        <tbody>
-        {rows.map((row, i) => (
-            <tr key={i}>
-              <td>{row.code}</td>
-              <td>{row.company}</td>
-              <td>{row.name}</td>
-              <td>{row.status}</td>
-            </tr>
-        ))}
-        </tbody>
-      </table>
+
+      <div className="p-4">
+        <table className="table table-bordered mt-5">
+          <thead className="table-info">
+          <tr>
+            <th className="text-center align-middle">주문 번호</th>
+            <th className="text-center align-middle">주문 날짜</th>
+            <th className="text-center align-middle">부품명</th>
+            <th className="text-center align-middle">주문 상태</th>
+          </tr>
+          </thead>
+          <tbody>
+          {rows.map((row, i) => (
+              <tr key={i}>
+                <td className="text-center align-middle">{row.orderId}</td>
+                <td className="text-center align-middle">{row.date}</td>
+                <td className="text-center align-middle">{row.name}</td>
+                <td className="text-center align-middle">{row.status}</td>
+              </tr>
+          ))}
+          </tbody>
+        </table>
+      </div>
   );
 }
 
@@ -41,7 +45,7 @@ export function ApprovalModal() {
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
-              <table className="table table-bordered">
+            <table className="table table-bordered">
                 <tbody>
                 <tr>
                   <th>가맹점 Code</th>
