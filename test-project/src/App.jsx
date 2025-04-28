@@ -1,25 +1,31 @@
-import PaymentCheck, {ApprovalModal} from "./layout/main/PaymentCheck.jsx";
+// import PaymentCheck, {ApprovalModal} from "./layout/main/PaymentCheck.jsx";
 import MainInfoPanel from "./layout/main/MainInfoPanel.jsx";
 import SelectPanel from "./layout/main/SelectPanel.jsx";
 import SidebarMenu from "./layout/main/SidebarMenu.jsx";
 // import {useState} from "react";
 import Topbar from "./layout/main/Topbar.jsx";
-
+import Agency from "./layout/agency/Agency.jsx";
+import {BrowserRouter, Route, Routes }  from "react-router-dom";
+import Home from "./layout/main/Home.jsx";
+import Login from "./layout/Login.jsx";
+import Test from "./layout/main/Logistics/Test.jsx";
+import Inventory from "./layout/main/Logistics/Inventory.jsx";
 
 function App() {
 
     return (
-        <div className="d-flex vh-100">
-            <SidebarMenu />
-            <div className="flex-grow-1 d-flex flex-column overflow-hidden">
-                <Topbar />
-                <div className="p-3 overflow-auto" style={{ height: "calc(100vh - 120px)" }}>
-                    <SelectPanel />
-                    <MainInfoPanel />
-                    <PaymentCheck />
-                </div>
-            </div>
-        </div>
+
+
+    <BrowserRouter>
+        {/* 페이지별 라우팅 */}
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/agency" element={<Agency />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/test" element={<Test />} />
+            <Route path="/inv" element={<Inventory />} />
+        </Routes>
+    </BrowserRouter>
     );
 }
 

@@ -1,5 +1,4 @@
-import {ApprovalModal} from "./PaymentCheck.jsx";
-import {useState} from "react";
+// import {ApprovalModal} from "./PaymentCheck.jsx";
 
 function MainInfoPanel() {
 
@@ -17,20 +16,15 @@ function MainInfoPanel() {
   ];
 
 
-
-  const [showApprovalModal, setShowApprovalModal] = useState(false);
-  const handleOpenModal = () => setShowApprovalModal(true);
-  const handleCloseModal = () => setShowApprovalModal(false);
-
-
   return (
-      <div>
 
+
+      <div>
         <div className="p-4 mt-3 bg-light w-100 overflow-auto">
           <h2 className="h5 fw-bold mb-3">미결재 리스트</h2>
           <table className="table table-bordered">
-            <thead className="table-info">
-            <tr>
+            <thead className="table-info" >
+            <tr >
               <th className="text-center" rowSpan="2" style={{width: '130px', height: '60px'}}>대리점 ID</th>
               <th className="text-center align-middle" colSpan="2">부품</th>
               <th className="text-center align-middle" colSpan="2">가격</th>
@@ -63,9 +57,9 @@ function MainInfoPanel() {
         <hr></hr>
 
         <div className="p-4 mt-3 bg-light w-100 overflow-auto">
-          <h2 className="h5 fw-bold mb-3 text-warning">요청한 가맹점 정보</h2>
+          <h2 className="h5 fw-bold mb-3">요청한 가맹점 정보</h2>
           <table className="table table-bordered">
-            <thead className="table-light">
+            <thead className="table-info">
             <tr>
               <th className="text-center align-middle">가맹점 Code</th>
               <th className="text-center align-middle">지점명</th>
@@ -113,39 +107,14 @@ function MainInfoPanel() {
                   <td className="text-center align-middle">{row.price}</td>
                   <td className="text-center align-middle">{row.date}</td>
                 </tr>
-              ))
+            ))
             }
-
-            {/*<tr className="table-info fw-bold">*/}
-            {/*<td>합계</td>*/}
-            {/*  <td>-</td>*/}
-            {/*  <td>-</td>*/}
-            {/*  <td>-</td>*/}
-            {/*  <td>-</td>*/}
-            {/*  <td>-</td>*/}
-            {/*</tr>*/}
-            {/*<tr className="table-primary">*/}
-            {/*  <td>순이익</td>*/}
-            {/*  <td>-</td>*/}
-            {/*  <td>-</td>*/}
-            {/*  <td>-</td>*/}
-            {/*  <td>-</td>*/}
-            {/*  <td>-</td>*/}
-            {/*</tr>*/}
             </tbody>
           </table>
           <div className="mt-3 text-end">
-            <button className="btn btn-warning" onClick={handleOpenModal}>결재</button>
+            <button className="btn btn-warning" onClick="">결재</button>
           </div>
         </div>
-        {showApprovalModal && (
-            <div
-                className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center">
-              <ApprovalModal/>
-              <button className="position-absolute top-0 end-0 m-3 btn btn-outline-light" onClick={handleCloseModal}>X
-              </button>
-            </div>
-        )}
 
         <hr></hr>
       </div>

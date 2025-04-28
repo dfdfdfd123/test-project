@@ -3,7 +3,7 @@ function SelectPanel() {
         <div>
 
             <div className="bg-white mb-3 ms-2">
-                <div className="text-dark small">☆ 발주관리 &gt; 대리점 발주 내역 확인</div>
+                <div className="text-dark small">☆ 주문 관리 &gt; 주문 확정</div>
             </div>
 
             <div
