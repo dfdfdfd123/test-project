@@ -2,7 +2,7 @@ import {LogIn, LogOut, BarChart2 } from "lucide-react";
 import {useState} from "react";
 import GraphImage from "../../../../assets/Graph.png";
 
-function HQPanel2() {
+function Table() {
 
     const [isGraphChecked, setIsGraphChecked] = useState(false);
 
@@ -23,7 +23,7 @@ function HQPanel2() {
                 {/*<h2 className="h5 fw-bold mb-3">입고리스트</h2>*/}
 
                 <div className="d-flex justify-content-between align-items-center text-primary mb-3">
-                    <div className="d-flex align-items-center gap-2">
+                    <div className="fw-bold d-flex align-items-center gap-2">
                         {isGraphChecked ? (
                             <BarChart2 className="cursor-pointer text-primary" size={20} strokeWidth={2} />
                         ) : (
@@ -46,14 +46,15 @@ function HQPanel2() {
                 {/* 테이블 , 체크박스 체크 시, 테이블 대신,이미지 파일이 들어감.*/}
                 {/* 테이블 또는 그래프를 조건부로 표시 */}
                 {isGraphChecked ? (
-                    <div className="text-center">
+                    <div className="text-center mt-4">
                         <img src={GraphImage} alt="그래프" style={{ width: "100%", height: "auto" }} />
                     </div>
                 ) : (
+                    <div className="mt-4">
                     <table className="table table-bordered">
                         <thead className="table-info">
                         <tr>
-                            <th>부품 고유 ID</th>
+                            <th className="text-center align-middle">부품 고유 ID</th>
                             <th className="text-center align-middle">부품 명</th>
                             <th className="text-center align-middle">부품코드 번호</th>
                             <th className="text-center align-middle">부품 카테고리</th>
@@ -74,90 +75,47 @@ function HQPanel2() {
                         ))}
                         </tbody>
                     </table>
+                    </div>
                 )}
             </div>
-
-            {/*    <table className="table table-bordered">*/}
-            {/*        <thead className="table-info">*/}
-            {/*        <tr>*/}
-            {/*            <th className="text-center align-middle">부품 고유 ID</th>*/}
-            {/*            <th className="text-center align-middle">부품 명</th>*/}
-            {/*            <th className="text-center align-middle">부품코드 번호</th>*/}
-            {/*            <th className="text-center align-middle">부품 카테고리</th>*/}
-            {/*            <th className="text-center align-middle">입고량</th>*/}
-            {/*            <th className="text-center align-middle">카테고리</th>*/}
-            {/*        </tr>*/}
-            {/*        </thead>*/}
-            {/*        <tbody>*/}
-            {/*        {rows.map((row, i) => (*/}
-            {/*            <tr key={i}>*/}
-            {/*                <td className="text-center align-middle">{row.stockId}</td>*/}
-            {/*                <td className="text-center align-middle">{row.name}</td>*/}
-            {/*                <td className="text-center align-middle">{row.stockCodeId}</td>*/}
-            {/*                <td className="text-center align-middle">{row.warehouseCate}</td>*/}
-            {/*                <td className="text-center align-middle">{row.quantity}</td>*/}
-            {/*                <td className="text-center align-middle">{row.CateNumber}</td>*/}
-            {/*            </tr>*/}
-            {/*        ))}*/}
-            {/*        </tbody>*/}
-            {/*    </table>*/}
-            {/*</div>*/}
-
 
             {/*<hr></hr>*/}
 
             {/*<h2 className="p-1 h5 fw-bold mb-3">재고</h2>*/}
             {/*<hr></hr>*/}
 
-
-
             <div className="p-4 mt-3 bg-light w-100 overflow-auto">
-
                 <div className="d-flex justify-content-between align-items-center text-primary mb-3">
-
                     <div className="d-flex align-items-center gap-2">
                         <LogOut
                             className="cursor-pointer text-primary"
                             size={20}
                             strokeWidth={2}
                         />
-                        <h2 className="h5 fw-bold mb-0">재고</h2>
+                        <h5 className="fw-bold mb-0">재고</h5>
                     </div>
                 </div>
-
 
                 {/*<h2 className="h5 fw-bold mb-3 text-primary">재고</h2>*/}
 
                 <hr></hr>
 
-
+                <div className="mt-4">
                 <table className="table table-bordered">
-
                     <thead className="table-info">
-
                     <tr>
                         <th className="text-center align-middle">부품 고유 ID</th>
-
                         <th className="text-center align-middle">부품명</th>
-
                         <th className="text-center align-middle">부품코드 번호</th>
-
                         <th className="text-center align-middle">부품 카테고리</th>
-
                         <th className="text-center align-middle">재고량</th>
-
                         <th className="text-center align-middle">카테고리</th>
-
                     </tr>
-
                     </thead>
-
                     <tbody>
-
                     {rows.map((row, i) => (
 
                         <tr key={i}>
-
                             <td className="text-center align-middle">{row.stockId}</td>
                             <td className="text-center align-middle">{row.name}</td>
                             <td className="text-center align-middle">{row.stockCodeId}</td>
@@ -165,29 +123,19 @@ function HQPanel2() {
                             <td className="text-center align-middle">{row.quantity}</td>
                             <td className="text-center align-middle">{row.CateNumber}</td>
                         </tr>
-
                     ))
-
                     }
-
                     </tbody>
-
                 </table>
+                </div>
 
             </div>
-
-
             <hr></hr>
-
         </div>
-
     );
-
 }
 
-
-export default HQPanel2
-
+export default Table
 
 {/*<h2 className="h5 fw-bold mb-3 d-flex align-items-center text-primary">*/}
 {/*    <LogOut className="cursor-pointer  ms-2"/>*/}

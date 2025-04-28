@@ -11,6 +11,13 @@ function DeliveryTable() {
     { stockId:'DKF-5223',  name: '크랭크샤프트', stockCodeId: 'AB12', warehouseCate: '엔진', quantity: '2', WareHouse: '100', status: '출고 완료'  },
     { stockId:'EFW-1234',  name: '타이밍 벨트', stockCodeId: 'CADS1', warehouseCate: '엔진', quantity: '1', WareHouse: '100', status: '출고 완료'  },
     { stockId:'CFW-3145',  name: '서스펜션 패드', stockCodeId: '4124', warehouseCate: '서스펜션', quantity: '1', WareHouse: '100', status: '출고 완료'  },
+    { stockId:'ABC-1234',  name: '브레이크 패드', stockCodeId: 'A2345', warehouseCate: '브레이크', quantity: '3', WareHouse: '100', status: '출고 완료'  },
+    { stockId:'DKF-5223',  name: '크랭크샤프트', stockCodeId: 'AB12', warehouseCate: '엔진', quantity: '2', WareHouse: '100', status: '출고 완료'  },
+    { stockId:'EFW-1234',  name: '타이밍 벨트', stockCodeId: 'CADS1', warehouseCate: '엔진', quantity: '1', WareHouse: '100', status: '출고 완료'  },
+    { stockId:'CFW-3145',  name: '서스펜션 패드', stockCodeId: '4124', warehouseCate: '서스펜션', quantity: '1', WareHouse: '100', status: '출고 완료'  },
+    { stockId:'ABC-1234',  name: '브레이크 패드', stockCodeId: 'A2345', warehouseCate: '브레이크', quantity: '3', WareHouse: '100', status: '출고 완료'  },
+    { stockId:'DKF-5223',  name: '크랭크샤프트', stockCodeId: 'AB12', warehouseCate: '엔진', quantity: '2', WareHouse: '100', status: '출고 완료'  },
+    { stockId:'EFW-1234',  name: '타이밍 벨트', stockCodeId: 'CADS1', warehouseCate: '엔진', quantity: '1', WareHouse: '100', status: '출고 완료'  },
 
   ]
 

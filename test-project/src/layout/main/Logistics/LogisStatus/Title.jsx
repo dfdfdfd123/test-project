@@ -1,6 +1,6 @@
 
 
-function HQPanel1({ panelTitle, breadcrumb }) {
+function Title({ panelTitle, breadcrumb }) {
 
 
     return (
@@ -23,4 +23,4 @@ function HQPanel1({ panelTitle, breadcrumb }) {
     );
 }
 
-export default HQPanel1;
+export default Title;
