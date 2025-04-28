@@ -1,6 +1,6 @@
 import {LogIn, LogOut, BarChart2 } from "lucide-react";
 import {useState} from "react";
-import GraphImage from "../../../assets/Graph.png";
+import GraphImage from "../../../../assets/Graph.png";
 
 function HQPanel2() {
 

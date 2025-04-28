@@ -1,14 +1,14 @@
 
 import SidebarMenu from "../SidebarMenu.jsx";
 import Topbar from "../Topbar.jsx";
-import HQPanel1 from "./HQPanel1.jsx";
-import HQPanel2 from "./HQPanel2.jsx";
+import HQPanel1 from "./LogisStatus/HQPanel1.jsx";
+import HQPanel2 from "./LogisStatus/HQPanel2.jsx";
 
 
-function Test() {
+function Logis() {
 
     const menuItems = [
-        { text: "주문 처리", link: "#" },
+        { text: "물류 현황", link: "#" },
         { text: "물류 재고관리", link: "/inv" }
     ];
 
@@ -28,7 +28,7 @@ function Test() {
 }
 
 
-export default Test
+export default Logis
 
 
 

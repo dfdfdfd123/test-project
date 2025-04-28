@@ -2,10 +2,10 @@
 // Inventory.jsx
 import SidebarMenu from "../SidebarMenu.jsx";
 import Topbar from "../Topbar.jsx";
-import HQPanel1 from "./HQPanel1.jsx";
-import HQPanel2 from "./HQPanel2.jsx";
-import LogisSelect from "./LogisSelect.jsx";
-import DeliveryTable from "./DeliveryTable.jsx";
+import HQPanel1 from "./LogisStatus/HQPanel1.jsx";
+import HQPanel2 from "./LogisStatus/HQPanel2.jsx";
+import LogisSelect from "./LogisManage/LogisSelect.jsx";
+import DeliveryTable from "./LogisManage/DeliveryTable.jsx";
 
 function Inventory() {
     const menuItems = [

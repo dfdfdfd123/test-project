@@ -8,7 +8,7 @@ import Agency from "./layout/agency/Agency.jsx";
 import {BrowserRouter, Route, Routes }  from "react-router-dom";
 import Home from "./layout/main/Home.jsx";
 import Login from "./layout/Login.jsx";
-import Test from "./layout/main/Logistics/Test.jsx";
+import Logis from "./layout/main/Logistics/Logis.jsx";
 import Inventory from "./layout/main/Logistics/Inventory.jsx";
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/agency" element={<Agency />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/test" element={<Test />} />
+            <Route path="/test" element={<Logis />} />
             <Route path="/inv" element={<Inventory />} />
         </Routes>
     </BrowserRouter>
