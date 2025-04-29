@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"; // 추가
+import { Link } from "react-router-dom";
 
 function SidebarMenu({ menuItems }) {
     return (
