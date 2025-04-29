@@ -1,6 +1,7 @@
 package com.example.orderapp
 
 
+// 주문 상세 어뎁터
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

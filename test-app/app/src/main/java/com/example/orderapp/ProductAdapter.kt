@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.orderapp.databinding.ItemProductBinding
 
+// 상품추가 어뎁터
+
 class ProductAdapter(private val items: List<Product>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 

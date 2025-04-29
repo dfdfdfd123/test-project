@@ -9,6 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.orderapp.databinding.ActivityProjectSelectBinding
 
+// 상품 추가
 class ProjectSelect : AppCompatActivity() {
 
     private lateinit var binding: ActivityProjectSelectBinding

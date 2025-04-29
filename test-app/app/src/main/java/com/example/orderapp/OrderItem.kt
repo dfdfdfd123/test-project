@@ -1,5 +1,6 @@
 package com.example.orderapp
 
+// 주문상세 더미데이터
 
 data class OrderItem(
     val code: String,

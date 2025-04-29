@@ -1,4 +1,5 @@
-// 더미 데이터 형식
+// 상품추가 더미 데이터 형식
+
 data class Product(
     val code: String,
     val name: String,
