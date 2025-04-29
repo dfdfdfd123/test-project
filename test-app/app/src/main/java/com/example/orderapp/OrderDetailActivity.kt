@@ -41,7 +41,7 @@ class OrderDetailActivity : AppCompatActivity() {
     }
 
     private fun loadOrderItems() {
-        repeat(4) {
+        repeat(3) {
             orderItems.add(OrderItem("a1011", "볼트", "엔진", "1개", "20,000", "20,000" ))
         }
         adapter.notifyDataSetChanged()
