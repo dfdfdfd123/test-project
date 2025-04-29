@@ -186,13 +186,14 @@
     </LinearLayout>
 
     <!-- 출고 버튼 -->
-    <Button
+
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="출고"
         android:textStyle="bold"
-        android:backgroundTint="#9CBFF4"
         android:textColor="@android:color/black"
+        android:background="@drawable/button_round_bg"
         android:layout_margin="16dp"/>
 </LinearLayout>
 
