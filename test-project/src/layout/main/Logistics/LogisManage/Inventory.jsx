@@ -2,7 +2,7 @@
 // Inventory.jsx
 import SidebarMenu from "../../SidebarMenu.jsx";
 import Topbar from "../../Topbar.jsx";
-import Title from "../LogisStatus/Title.jsx";
+import Title from "../Title.jsx";
 import LogisSelect from "./LogisSelect.jsx";
 import DeliveryTable from "./DeliveryTable.jsx";
 

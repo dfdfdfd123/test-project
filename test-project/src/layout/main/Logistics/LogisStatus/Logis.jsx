@@ -1,7 +1,7 @@
 
 import SidebarMenu from "../../SidebarMenu.jsx";
 import Topbar from "../../Topbar.jsx";
-import Title from "./Title.jsx";
+import Title from "../Title.jsx";
 import Table from "./Table.jsx";
 
 
