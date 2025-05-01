@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.orderapp.databinding.ActivityMainBinding
+import com.example.orderapp.min.orderdetail.OrderDetailActivity
+import com.example.orderapp.min.productselect.ProjectSelect
 
 class MainActivity : AppCompatActivity() {
 

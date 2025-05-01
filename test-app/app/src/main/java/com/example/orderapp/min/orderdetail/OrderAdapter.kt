@@ -1,4 +1,4 @@
-package com.example.orderapp
+package com.example.orderapp.min.orderdetail
 
 
 // 주문 상세 어뎁터

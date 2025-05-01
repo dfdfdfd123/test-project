@@ -114,8 +114,8 @@ function Table() {
                     </thead>
                     <tbody>
                     {rows.map((row, i) => (
-
-                        <tr key={i}>
+                        // <tr key={i}>
+                        <tr key={row.stockId + '-' + i}>
                             <td className="text-center align-middle">{row.stockId}</td>
                             <td className="text-center align-middle">{row.name}</td>
                             <td className="text-center align-middle">{row.stockCodeId}</td>

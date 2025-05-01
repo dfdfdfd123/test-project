@@ -1,12 +1,10 @@
-package com.example.orderapp
+package com.example.orderapp.min.productselect
 
 import Product
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.orderapp.R
 import com.example.orderapp.databinding.ActivityProjectSelectBinding
 
 // 상품 추가

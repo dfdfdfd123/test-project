@@ -1,6 +1,6 @@
 // 필요없는 파일
 
-package com.example.orderapp
+package com.example.orderapp.min.orderdetail
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
