@@ -1,9 +1,9 @@
 function HQPaymentCheck() {
   const rows = [
     { orderId: '25-001', date: '2024-04-20', name: '엔진', status: '결제' },
-    { orderId: '25-002', date: '2024-04-20', name: '사이드 미러', status: '반려' },
+    { orderId: '25-002', date: '2024-04-20', name: '사이드 미러', status: '승인 대기' },
     { orderId: '25-003', date: '2024-04-20', name: '엔진', status: '결제' },
-    { orderId: '25-004', date: '2024-04-20', name: '사이드 미러', status: '반려' },
+    { orderId: '25-004', date: '2024-04-20', name: '사이드 미러', status: '승인 대기' },
 
   ];
 

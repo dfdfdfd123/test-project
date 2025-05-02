@@ -23,13 +23,13 @@ function HQMainPanel() {
           <table className="table table-bordered">
             <thead className="table-info">
             <tr>
-              <th className="text-center align-middle" rowSpan="2" style={{width: '130px', height: '60px'}}>대리점 ID</th>
-              <th className="text-center align-middle" rowSpan="2" style={{width: '130px', height: '60px'}}>지점명</th>
+              <th className="text-center align-middle" rowSpan="2"  style={{width: '130px', height: '60px'}}>대리점 ID</th>
+              <th className="text-center align-middle" rowSpan="2"  style={{width: '130px', height: '60px'}}>지점명</th>
               <th className="text-center align-middle" colSpan="2">부품</th>
               <th className="text-center align-middle" colSpan="2">가격</th>
-              <th className="text-center align-middle" rowSpan="2" style={{width: '130px'}}>주문번호</th>
-              <th className="text-center align-middle" rowSpan="2" style={{width: '130px'}}>주문일자</th>
-              <th className="text-center align-middle" rowSpan="2" style={{width: '130px'}}>주문현황</th>
+              <th className="text-center align-middle"  rowSpan="2"   style={{width: '130px'}}>주문번호</th>
+              <th className="text-center align-middle"  rowSpan="2" style={{width: '130px'}}>주문일자</th>
+              <th className="text-center align-middle" rowSpan="2"  style={{width: '130px'}}>주문현황</th>
             </tr>
             <tr>
               <th className="text-center align-middle" style={{width: '130px'}}>부품 Code</th>
