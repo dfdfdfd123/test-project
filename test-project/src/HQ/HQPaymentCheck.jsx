@@ -1,10 +1,9 @@
 function HQPaymentCheck() {
   const rows = [
-    { orderId: '25-001', date: '2024-04-20', name: '엔진', status: '결제' },
-    { orderId: '25-002', date: '2024-04-20', name: '사이드 미러', status: '승인 대기' },
-    { orderId: '25-003', date: '2024-04-20', name: '엔진', status: '결제' },
-    { orderId: '25-004', date: '2024-04-20', name: '사이드 미러', status: '승인 대기' },
-
+    { orderId: '25-001', orderDate: '2024-04-20', partName: '엔진', orderDeny: '결제' },
+    { orderId: '25-002', orderDate: '2024-04-20', partName: '사이드 미러', orderDeny: '반려' },
+    { orderId: '25-003', orderDate: '2024-04-20', partName: '엔진', orderDeny: '결제' },
+    { orderId: '25-004', orderDate: '2024-04-20', partName: '사이드 미러', orderDeny: '반려' },
   ];
 
   return (
@@ -14,7 +13,7 @@ function HQPaymentCheck() {
           <thead className="table-info">
           <tr>
             <th className="text-center align-middle">주문 번호</th>
-            <th className="text-center align-middle">주문 날짜</th>
+            <th className="text-center align-middle">주문 일자</th>
             <th className="text-center align-middle">부품명</th>
             <th className="text-center align-middle">주문 상태</th>
           </tr>
@@ -23,9 +22,9 @@ function HQPaymentCheck() {
           {rows.map((row, i) => (
               <tr key={i}>
                 <td className="text-center align-middle">{row.orderId}</td>
-                <td className="text-center align-middle">{row.date}</td>
-                <td className="text-center align-middle">{row.name}</td>
-                <td className="text-center align-middle">{row.status}</td>
+                <td className="text-center align-middle">{row.orderDate}</td>
+                <td className="text-center align-middle">{row.partName}</td>
+                <td className="text-center align-middle">{row.orderDeny}</td>
               </tr>
           ))}
           </tbody>

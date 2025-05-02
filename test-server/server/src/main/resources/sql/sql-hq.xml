@@ -4,4 +4,28 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bitc.fullstack503.server.mapper.HQMapper">
 
+    <select id="findOrderItemsWithBranchAndParts" resultType="bitc.fullstack503.server.dto.OrderItemInfoDTO">
+        SELECT
+        b.branch_id,
+        oi.parts_id,
+        p.part_name,
+        oi.order_item_quantity,
+        oi.order_item_price,
+        o.order_date
+        FROM order_item oi
+        JOIN parts p ON oi.parts_id = p.part_id
+        JOIN orders o ON oi.order_id = o.order_id
+        JOIN branch b ON o.branch_id = b.branch_id
+    </select>
+
+    <select id="findTestsWithBranchAndParts" resultType="bitc.fullstack503.server.dto.TestDTO">
+        SELECT
+        b.branch_id,
+        b.branch_name,
+        p.part_id,
+        p.part_name
+        FROM branch b
+        CROSS JOIN parts p
+    </select>
+
 </mapper>
