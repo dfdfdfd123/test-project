@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 
-function HQMainPanel() {
+// function HQMainPanel() {
+function HQMainPanel( { filteredRows, isFiltered }) {
 
   const [showApprovalModal, setShowApprovalModal] = useState(false);
 
@@ -15,25 +16,37 @@ function HQMainPanel() {
   const [rows2, setRows2] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/HQMain/order-item-info")
-        .then(res => {
-          console.log("서버 응답:", res.data); // 👉 콘솔 출력
-          setRows(res.data);
-        })
-        .catch(err => {
-          console.error("데이터 불러오기 실패:", err);
-        });
+    // axios.get("http://localhost:8080/HQMain/order-item-info")
+    //     .then(res => {
+    //       console.log("서버 응답:", res.data); // 👉 콘솔 출력
+    //       setRows(res.data);
+    //     })
+    //     .catch(err => {
+    //       console.error("데이터 불러오기 실패:", err);
+    //     });
 
-    axios.get("http://localhost:8080/HQMain/orderList")
-        .then(res => {
-          console.log("서버 응답:", res.data); // 👉 콘솔 출력
-          setRows2(res.data);
-        })
-        .catch(err => {
-          console.error("데이터 불러오기 실패:", err);
-        });
+    if (!isFiltered) {
+      axios.get("http://localhost:8080/HQMain/order-item-info")
+          .then(res => {
+            console.log("order-item-info 응답:", res.data);
+            setRows(res.data);
+          })
+          .catch(err => {
+            console.error("order-item-info 불러오기 실패:", err);
+          });
 
-  }, []);
+      axios.get("http://localhost:8080/HQMain/orderList")
+          .then(res => {
+            console.log("서버 응답:", res.data); // 👉 콘솔 출력
+            setRows2(res.data);
+          })
+          .catch(err => {
+            console.error("데이터 불러오기 실패:", err);
+          });
+
+      // }, []);
+      }
+    }, [isFiltered]);
 
 
   // const rows = [
@@ -48,6 +61,12 @@ function HQMainPanel() {
   //   {branchId:'-', partId: '-', partName: '-', orderItemQuantity: '-', orderItemPrice: '-', orderDate: '-' },
   //   {branchId:'-', partId: '-', partName: '-', orderItemQuantity: '-', orderItemPrice: '-', orderDate: '-' },
   // ];
+
+  useEffect(() => {
+    if (isFiltered) {
+      setRows(filteredRows);
+    }
+  }, [filteredRows, isFiltered]);
 
 
   return (
