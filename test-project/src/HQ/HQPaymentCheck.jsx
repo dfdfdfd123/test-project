@@ -1,10 +1,29 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 function HQPaymentCheck() {
-  const rows = [
-    { orderId: '25-001', orderDate: '2024-04-20', partName: '엔진', orderDeny: '결제' },
-    { orderId: '25-002', orderDate: '2024-04-20', partName: '사이드 미러', orderDeny: '반려' },
-    { orderId: '25-003', orderDate: '2024-04-20', partName: '엔진', orderDeny: '결제' },
-    { orderId: '25-004', orderDate: '2024-04-20', partName: '사이드 미러', orderDeny: '반려' },
-  ];
+
+
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/HQMain/payment")
+        .then(res => {
+          console.log("서버 응답:", res.data); // 👉 콘솔 출력
+          setRows(res.data);
+        })
+        .catch(err => {
+          console.error("데이터 불러오기 실패:", err);
+        });
+
+  }, []);
+
+  // const rows = [
+  //   { orderId: '25-001', orderDate: '2024-04-20', partName: '엔진', orderDeny: '결제' },
+  //   { orderId: '25-002', orderDate: '2024-04-20', partName: '사이드 미러', orderDeny: '반려' },
+  //   { orderId: '25-003', orderDate: '2024-04-20', partName: '엔진', orderDeny: '결제' },
+  //   { orderId: '25-004', orderDate: '2024-04-20', partName: '사이드 미러', orderDeny: '반려' },
+  // ];
 
   return (
       <div className="p-4 mt-3 bg-light w-100 overflow-auto">

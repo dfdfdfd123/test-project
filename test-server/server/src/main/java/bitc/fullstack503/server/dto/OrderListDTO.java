@@ -10,15 +10,12 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderItemInfoDTO {
+public class OrderListDTO {
     private String branchId;
-    private String branchName;
     private String partsId;
     private String partName;
     private int orderItemQuantity;
     private BigDecimal orderItemPrice;
     private Date orderDate;
-    private String orderId;
     private String orderStatus;
 }
-

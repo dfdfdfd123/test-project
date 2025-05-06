@@ -1,5 +1,5 @@
-import {useState} from "react";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 
 function HQMainPanel() {
@@ -9,18 +9,45 @@ function HQMainPanel() {
   const handleOpenModal = () => setShowApprovalModal(true);
   const handleCloseModal = () => setShowApprovalModal(false);
 
-  const rows = [
-    { branchId:'25-000', branchName: '부산점', partId: '25-001',  partName: '엔진', orderItemQuantity: '3', orderItemPrice: '49,000', orderId: 'asvv101', orderDate: '2024-04-20', orderStatus:'승인 대기' },
-    {branchId:'25-000', branchName: '서울점', partId: '25-002', partName: '사이드미러', orderItemQuantity: '10', orderItemPrice: '530,000', orderId: 'bbas221', orderDate: '2024-04-27', orderStatus: '승인 대기'  },
-  ];
 
-  const rows2 = [
-    { branchId:'25-000', partId: '부산점',  partName: '엔진', orderItemQuantity: '3', orderItemPrice: '49,000', orderDate: '2024-04-20' },
-    {branchId:'25-000', partId: '부산점', partName: '사이드미러', orderItemQuantity: '10', orderItemPrice: '530,000', orderDate: '2024-04-27' },
-    { branchId:'-', partId: '-',  partName: '-', orderItemQuantity: '-', orderItemPrice: '-', orderDate: '-' },
-    {branchId:'-', partId: '-', partName: '-', orderItemQuantity: '-', orderItemPrice: '-', orderDate: '-' },
-    {branchId:'-', partId: '-', partName: '-', orderItemQuantity: '-', orderItemPrice: '-', orderDate: '-' },
-  ];
+  const [rows, setRows] = useState([]);
+
+  const [rows2, setRows2] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/HQMain/order-item-info")
+        .then(res => {
+          console.log("서버 응답:", res.data); // 👉 콘솔 출력
+          setRows(res.data);
+        })
+        .catch(err => {
+          console.error("데이터 불러오기 실패:", err);
+        });
+
+    axios.get("http://localhost:8080/HQMain/orderList")
+        .then(res => {
+          console.log("서버 응답:", res.data); // 👉 콘솔 출력
+          setRows2(res.data);
+        })
+        .catch(err => {
+          console.error("데이터 불러오기 실패:", err);
+        });
+
+  }, []);
+
+
+  // const rows = [
+  //   { branchId:'25-000', branchName: '부산점', partId: '25-001',  partName: '엔진', orderItemQuantity: '3', orderItemPrice: '49,000', orderId: 'asvv101', orderDate: '2024-04-20', orderStatus:'승인 대기' },
+  //   {branchId:'25-000', branchName: '서울점', partId: '25-002', partName: '사이드미러', orderItemQuantity: '10', orderItemPrice: '530,000', orderId: 'bbas221', orderDate: '2024-04-27', orderStatus: '승인 대기'  },
+  // ];
+
+  // const rows2 = [
+  //   { branchId:'25-000', partId: '부산점',  partName: '엔진', orderItemQuantity: '3', orderItemPrice: '49,000', orderDate: '2024-04-20' },
+  //   {branchId:'25-000', partId: '부산점', partName: '사이드미러', orderItemQuantity: '10', orderItemPrice: '530,000', orderDate: '2024-04-27' },
+  //   { branchId:'-', partId: '-',  partName: '-', orderItemQuantity: '-', orderItemPrice: '-', orderDate: '-' },
+  //   {branchId:'-', partId: '-', partName: '-', orderItemQuantity: '-', orderItemPrice: '-', orderDate: '-' },
+  //   {branchId:'-', partId: '-', partName: '-', orderItemQuantity: '-', orderItemPrice: '-', orderDate: '-' },
+  // ];
 
 
   return (
@@ -52,16 +79,15 @@ function HQMainPanel() {
                 <tr key={i}>
                   <td className="text-center align-middle">{row.branchId}</td>
                   <td className="text-center align-middle">{row.branchName}</td>
-                  <td className="text-center align-middle">{row.partId}</td>
+                  <td className="text-center align-middle">{row.partsId}</td>
                   <td className="text-center align-middle">{row.partName}</td>
                   <td className="text-center align-middle">{row.orderItemQuantity}</td>
-                  <td className="text-center align-middle">{row.orderItemPrice}</td>
+                  <td className="text-center align-middle">{row.orderItemPrice.toLocaleString()}</td>
                   <td className="text-center align-middle">{row.orderId}</td>
                   <td className="text-center align-middle">{row.orderDate}</td>
                   <td className="text-center align-middle">{row.orderStatus}</td>
                 </tr>
-            ))
-            }
+            ))}
             </tbody>
           </table>
         </div>
@@ -89,7 +115,7 @@ function HQMainPanel() {
             {rows2.map((row, i) => (
                 <tr key={i}>
                   <td className="text-center align-middle">{row.branchId}</td>
-                  <td className="text-center align-middle">{row.partId}</td>
+                  <td className="text-center align-middle">{row.partsId}</td>
                   <td className="text-center align-middle">{row.partName}</td>
                   <td className="text-center align-middle">{row.orderItemQuantity}</td>
                   <td className="text-center align-middle">{row.orderItemPrice}</td>
