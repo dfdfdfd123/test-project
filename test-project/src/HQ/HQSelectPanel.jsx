@@ -24,7 +24,7 @@ function HQSelectPanel({ onSearch }) {
         .then(response => {
           console.log(response.data); // 검색 결과
           // setRows3(response.data);
-          onSearch(response.data);    // 부모 컴포넌트에 전달
+          onSearch(response.data , orderStatus);    // 부모 컴포넌트에 전달
         })
         .catch(error => {
           console.error(error);

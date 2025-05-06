@@ -4,7 +4,7 @@ import HQSelectPanel from "./HQSelectPanel.jsx";
 import HQMainPanel from "./HQMainPanel.jsx";
 import HQPaymentCheck from "./HQPaymentCheck.jsx";
 import Title from "../layout/Title.jsx";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 
 
@@ -12,11 +12,17 @@ function HQMain() {
 
     const [filteredRows, setFilteredRows] = useState([]);
     const [isFiltered, setIsFiltered] = useState(false);
+    const [selectedOrderStatus, setSelectedOrderStatus] = useState("");
 
     const handleSearch = (searchResults) => {
         setFilteredRows(searchResults);
         setIsFiltered(true);
+        setSelectedOrderStatus(status);
     };
+
+    useEffect(() => {
+        console.log("선택된 주문현황:", selectedOrderStatus);
+    }, [selectedOrderStatus]);
 
     const menuItems = [
         { text: "주문 확정", link: "/HQMain" },
@@ -34,7 +40,8 @@ function HQMain() {
                     <br/>
                     <HQSelectPanel onSearch={handleSearch}  />
                     <HQMainPanel filteredRows={filteredRows} isFiltered={isFiltered} />
-                    <HQPaymentCheck/>
+                    {/*<HQPaymentCheck/>*/}
+                    {!(selectedOrderStatus === "승인 대기" || selectedOrderStatus === "승인") && <HQPaymentCheck />}
                 </div>
             </div>
         </div>
