@@ -4,6 +4,7 @@ import bitc.fullstack503.server.dto.*;
 import bitc.fullstack503.server.service.ClientService;
 import bitc.fullstack503.server.service.HQService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,9 +49,34 @@ public List<OrderDTO> searchOrders(@RequestBody OrderDTO dto) {
     return hqService.getFilteredOrders(dto);
 }
 
+// 단일 , 복수 주문 처리
+    @PostMapping("/update")
+    public ResponseEntity<?> updateOrders(@RequestBody UpdateOrdersRequest request) {
+        if (request.getOrderIdList() != null && !request.getOrderIdList().isEmpty()) {
+            // 복수 처리
+            int count = hqService.updateMultipleOrderStatusAndDeny(
+                    request.getOrderIdList(),
+                    request.getOrderStatus(),
+                    request.getOrderDeny()
+            );
+            return ResponseEntity.ok(count + "건 처리 완료");
+        } else if (request.getOrderId() != null) {
+            // 단일 처리
+            int result = hqService.updateOrderStatusAndDeny(
+                    request.getOrderId(),
+                    request.getOrderStatus(),
+                    request.getOrderDeny()
+            );
+            return ResponseEntity.ok("1건 처리 완료");
+        } else {
+            return ResponseEntity.badRequest().body("주문 정보가 없습니다.");
+        }
+    }
+
+
    // 테스트
-   @GetMapping("/test")
-   public List<TestDTO> getTestList() {
-        return hqService.getTestList();
-   }
+//   @GetMapping("/test")
+//   public List<TestDTO> getTestList() {
+//        return hqService.getTestList();
+//   }
 }

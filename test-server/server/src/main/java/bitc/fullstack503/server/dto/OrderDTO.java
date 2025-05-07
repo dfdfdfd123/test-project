@@ -1,3 +1,5 @@
+// 조회 결과
+
 package bitc.fullstack503.server.dto;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +20,7 @@ public class OrderDTO {
         private String orderStatus;
         private String startDate;
         private String endDate;
+        private String orderDeny;
         // + 조회 결과에 필요한 필드들 (예: 주문번호, 상품명, 수량 등)
         private String partsId;
         private String partName;

@@ -11,9 +11,25 @@ function HQSelectPanel({ onSearch }) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
-  // const [rows3, setRows3] = useState([]);
-
   const handleSearch = () => {
+
+    if (!branchId) {
+      alert('대리점 ID를 선택해주세요.');
+      return;
+    }
+    if (!branchName) {
+      alert('지점명을 선택해주세요.');
+      return;
+    }
+    if (!orderStatus) {
+      alert('주문현황을 선택해주세요.');
+      return;
+    }
+    if (!startDate || !endDate) {
+      alert('주문일자를 모두 선택해주세요.');
+      return;
+    }
+
     axios.post('http://localhost:8080/HQMain/search', {
       branchId,
       branchName,
@@ -83,7 +99,6 @@ function HQSelectPanel({ onSearch }) {
             <select className="form-select flex-shrink-1" style={{minWidth: '100px'}}  onChange={e => setOrderStatus(e.target.value)}>
               <option value="">주문현황</option>
               <option value="승인 대기">승인 대기</option>
-              <option value="승인">승인</option>
               <option value="결제">결제</option>
               <option value="반려">반려</option>
             </select>
@@ -93,48 +108,14 @@ function HQSelectPanel({ onSearch }) {
           <button className="btn btn-secondary flex-shrink-0"  onClick={handleSearch}>조회</button>
         </div>
 
-        {/*<hr/>*/}
-        {/*<div className="p-4 mt-3 bg-light w-100 overflow-auto">*/}
-        {/*  <h2 className="h5 fw-bold mb-3">미결재 리스트</h2>*/}
-        {/*  <table className="table table-bordered">*/}
-        {/*    <thead className="table-info">*/}
-        {/*    <tr>*/}
-        {/*      <th className="text-center align-middle" rowSpan="2"  style={{width: '130px', height: '60px'}}>대리점 ID</th>*/}
-        {/*      <th className="text-center align-middle" rowSpan="2"  style={{width: '130px', height: '60px'}}>지점명</th>*/}
-        {/*      <th className="text-center align-middle" colSpan="2">부품</th>*/}
-        {/*      <th className="text-center align-middle" colSpan="2">가격</th>*/}
-        {/*      <th className="text-center align-middle"  rowSpan="2"   style={{width: '130px'}}>주문번호</th>*/}
-        {/*      <th className="text-center align-middle"  rowSpan="2" style={{width: '130px'}}>주문일자</th>*/}
-        {/*      <th className="text-center align-middle" rowSpan="2"  style={{width: '130px'}}>주문현황</th>*/}
-        {/*    </tr>*/}
-        {/*    <tr>*/}
-        {/*      <th className="text-center align-middle" style={{width: '130px'}}>부품 Code</th>*/}
-        {/*      <th className="text-center align-middle" style={{width: '130px'}}>부품명</th>*/}
-        {/*      <th className="text-center align-middle" style={{width: '130px'}}>수량</th>*/}
-        {/*      <th className="text-center align-middle" style={{width: '130px'}}>비용</th>*/}
-        {/*    </tr>*/}
-        {/*    </thead>*/}
-        {/*    <tbody>*/}
-        {/*    {rows3.map((row, i) => (*/}
-        {/*        <tr key={i}>*/}
-        {/*          <td className="text-center align-middle">{row.branchId}</td>*/}
-        {/*          <td className="text-center align-middle">{row.branchName}</td>*/}
-        {/*          <td className="text-center align-middle">{row.partsId}</td>*/}
-        {/*          <td className="text-center align-middle">{row.partName}</td>*/}
-        {/*          <td className="text-center align-middle">{row.orderItemQuantity}</td>*/}
-        {/*          <td className="text-center align-middle">{row.orderItemPrice.toLocaleString()}</td>*/}
-        {/*          <td className="text-center align-middle">{row.orderId}</td>*/}
-        {/*          <td className="text-center align-middle">{row.orderDate}</td>*/}
-        {/*          <td className="text-center align-middle">{row.orderStatus}</td>*/}
-        {/*        </tr>*/}
-        {/*    ))}*/}
-        {/*    </tbody>*/}
-        {/*  </table>*/}
-        {/*</div>*/}
-
       </div>
   );
 }
 
 
 export default HQSelectPanel
+
+
+
+
+

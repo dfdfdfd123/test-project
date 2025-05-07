@@ -1,3 +1,5 @@
+// 미결제 리스트
+
 package bitc.fullstack503.server.dto;
 
 import lombok.AllArgsConstructor;
@@ -13,13 +15,14 @@ import java.util.Date;
 public class OrderItemInfoDTO {
     private String branchId;
     private String branchName;
-    private String partId;
+    private String partsId;
     private String partName;
     private int orderItemQuantity;
-    private String orderId;
     private BigDecimal orderItemPrice;
     private Date orderDate;
     private String orderStatus;
+    private String orderId;
+
 }
 
 

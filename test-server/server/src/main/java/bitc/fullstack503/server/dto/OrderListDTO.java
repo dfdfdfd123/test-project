@@ -1,3 +1,5 @@
+// 발주 내역
+
 package bitc.fullstack503.server.dto;
 
 import lombok.AllArgsConstructor;
@@ -12,10 +14,13 @@ import java.util.Date;
 @AllArgsConstructor
 public class OrderListDTO {
     private String branchId;
+    private String branchName;
     private String partsId;
     private String partName;
     private int orderItemQuantity;
     private BigDecimal orderItemPrice;
     private Date orderDate;
     private String orderStatus;
+    private String orderId;
+    private String orderDeny;
 }

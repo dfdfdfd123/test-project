@@ -1,3 +1,5 @@
+// 결제 내역
+
 package bitc.fullstack503.server.dto;
 
 import lombok.AllArgsConstructor;

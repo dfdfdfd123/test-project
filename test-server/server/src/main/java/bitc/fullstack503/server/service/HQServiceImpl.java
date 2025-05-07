@@ -12,28 +12,47 @@ public class HQServiceImpl implements HQService {
     @Autowired
     private HQMapper hqMapper;
 
+//    미결제 리스트
     @Override
     public List<OrderItemInfoDTO> getOrderItemInfoList() {
         return hqMapper.findOrderItemsWithBranchAndParts();
     }
 
-    @Override
-    public List<TestDTO> getTestList() {
-       return hqMapper.findTestsWithBranchAndParts();
-    }
-
-    @Override
-    public List<FindPaymentDTO> getFindPaymentList() {
-        return hqMapper.findPayment();
-    }
-
+//    발주 내역
     @Override
     public List<OrderListDTO> getOrderList() {
         return hqMapper.orderList();
     }
 
+    //    결제나 반려된 것들 리스트
+    @Override
+    public List<FindPaymentDTO> getFindPaymentList() {
+        return hqMapper.findPayment();
+    }
+
+//    조회 결과
     @Override
     public List<OrderDTO> getFilteredOrders(OrderDTO dto) {
         return hqMapper.selectOrderList(dto);
     }
+
+//    단일 주문 처리
+    @Override
+    public int updateOrderStatusAndDeny(String orderId,  String orderStatus, String orderDeny) {
+        return hqMapper.updateOrderStatusAndDeny(orderId, orderStatus, orderDeny);
+    }
+
+//    복수 주문 처리
+    @Override
+    public int updateMultipleOrderStatusAndDeny(List<String> orderIdList, String orderStatus, String orderDeny) {
+        return hqMapper.updateMultipleOrderStatusAndDeny(orderIdList, orderStatus, orderDeny);
+    }
+
+
+//    @Override
+//    public List<TestDTO> getTestList() {
+//        return hqMapper.findTestsWithBranchAndParts();
+//    }
+
+
 }

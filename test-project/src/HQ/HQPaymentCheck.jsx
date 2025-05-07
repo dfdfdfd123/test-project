@@ -1,29 +1,33 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function HQPaymentCheck() {
+function HQPaymentCheck({ filteredRows, isFiltered }) {
 
 
   const [rows, setRows] = useState([]);
 
+
   useEffect(() => {
-    axios.get("http://localhost:8080/HQMain/payment")
-        .then(res => {
-          console.log("서버 응답:", res.data); // 👉 콘솔 출력
-          setRows(res.data);
-        })
-        .catch(err => {
-          console.error("데이터 불러오기 실패:", err);
-        });
 
-  }, []);
+      if (!isFiltered) {
+          axios.get("http://localhost:8080/HQMain/payment")
+              .then(res => {
+                  console.log("서버 응답:", res.data);
+                  setRows(res.data);
+              })
+              .catch(err => {
+                  console.error("데이터 불러오기 실패:", err);
+              });
 
-  // const rows = [
-  //   { orderId: '25-001', orderDate: '2024-04-20', partName: '엔진', orderDeny: '결제' },
-  //   { orderId: '25-002', orderDate: '2024-04-20', partName: '사이드 미러', orderDeny: '반려' },
-  //   { orderId: '25-003', orderDate: '2024-04-20', partName: '엔진', orderDeny: '결제' },
-  //   { orderId: '25-004', orderDate: '2024-04-20', partName: '사이드 미러', orderDeny: '반려' },
-  // ];
+      }
+  }, [isFiltered]);
+
+
+    useEffect(() => {
+        if (isFiltered) {
+            setRows(filteredRows);
+        }
+    }, [filteredRows, isFiltered]);
 
   return (
       <div className="p-4 mt-3 bg-light w-100 overflow-auto">
@@ -38,14 +42,20 @@ function HQPaymentCheck() {
           </tr>
           </thead>
           <tbody>
-          {rows.map((row, i) => (
+          {rows.length === 0 ? (
+              <tr>
+                  <td colSpan="4" className="text-center">처리된 것이 없습니다.</td>
+              </tr>
+          ) : (
+          rows.map((row, i) => (
               <tr key={i}>
                 <td className="text-center align-middle">{row.orderId}</td>
                 <td className="text-center align-middle">{row.orderDate}</td>
                 <td className="text-center align-middle">{row.partName}</td>
                 <td className="text-center align-middle">{row.orderDeny}</td>
               </tr>
-          ))}
+            ))
+          )}
           </tbody>
         </table>
       </div>

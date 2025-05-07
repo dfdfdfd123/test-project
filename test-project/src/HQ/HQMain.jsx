@@ -4,7 +4,7 @@ import HQSelectPanel from "./HQSelectPanel.jsx";
 import HQMainPanel from "./HQMainPanel.jsx";
 import HQPaymentCheck from "./HQPaymentCheck.jsx";
 import Title from "../layout/Title.jsx";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 
 
 
@@ -14,15 +14,17 @@ function HQMain() {
     const [isFiltered, setIsFiltered] = useState(false);
     const [selectedOrderStatus, setSelectedOrderStatus] = useState("");
 
-    const handleSearch = (searchResults) => {
+    // 검색
+    const handleSearch = (searchResults, orderStatus) => {
         setFilteredRows(searchResults);
         setIsFiltered(true);
-        setSelectedOrderStatus(status);
+        // 선택한 주문현황
+        setSelectedOrderStatus(orderStatus);
     };
 
-    useEffect(() => {
-        console.log("선택된 주문현황:", selectedOrderStatus);
-    }, [selectedOrderStatus]);
+    // useEffect(() => {
+    //     console.log("선택된 주문현황:", selectedOrderStatus);
+    // }, [selectedOrderStatus]);
 
     const menuItems = [
         { text: "주문 확정", link: "/HQMain" },
@@ -39,9 +41,8 @@ function HQMain() {
                     <Title breadcrumb= "☆ 주문 확정 > 주문 내역" panelTitle="주문내역"/>
                     <br/>
                     <HQSelectPanel onSearch={handleSearch}  />
-                    <HQMainPanel filteredRows={filteredRows} isFiltered={isFiltered} />
-                    {/*<HQPaymentCheck/>*/}
-                    {!(selectedOrderStatus === "승인 대기" || selectedOrderStatus === "승인") && <HQPaymentCheck />}
+                    {!["결제", "반려"].includes(selectedOrderStatus) && <HQMainPanel filteredRows={filteredRows} isFiltered={isFiltered}  />}
+                    {!["승인 대기"].includes(selectedOrderStatus) && <HQPaymentCheck filteredRows={filteredRows} isFiltered={isFiltered} />}
                 </div>
             </div>
         </div>
