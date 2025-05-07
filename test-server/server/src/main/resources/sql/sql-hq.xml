@@ -65,7 +65,8 @@
 
 <!--    조회 -->
     <select id="selectOrderList" resultType="bitc.fullstack503.server.dto.SearchDTO">
-        SELECT o.branch_id, b.branch_name, o.order_status, o.order_date,  oi.part_id, p.part_name, oi.order_item_quantity, oi.order_item_price, o.order_id, o.order_deny
+        SELECT o.branch_id, b.branch_name, o.order_status, o.order_date,  oi.part_id, p.part_name, oi.order_item_quantity, o.order_price,
+        oi.order_item_price, o.order_id, o.order_deny, o.order_due_date
         FROM order_item oi
         JOIN parts p ON oi.part_id = p.part_id
         JOIN orders o ON oi.order_id = o.order_id

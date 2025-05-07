@@ -120,11 +120,26 @@ function HQMainPanel( { filteredRows, isFiltered }) {
                   <td colSpan="9" className="text-center">미결제 리스트가 없습니다.</td>
                 </tr>
             ) : (
-                rows.map((row, i) => (
+            //     rows.map((row, i) => (
+            //         <tr key={i} onClick={() => {
+            //           setSelectedOrderId(row.orderId);
+            //           setShowOrderDetails(true); // 발주내역 표시
+            //         }} style={{cursor: 'pointer'}}>
+            //           <td className="text-center align-middle">{row.orderId}</td>
+            //           <td className="text-center align-middle">{row.branchId}</td>
+            //           <td className="text-center align-middle">{row.orderDate}</td>
+            //           <td className="text-center align-middle">{row.orderDueDate}</td>
+            //           <td className="text-center align-middle">{row.orderPrice.toLocaleString()}</td>
+            //           <td className="text-center align-middle">{row.orderStatus}</td>
+            //         </tr>
+            //     ))
+            // )}
+                // 중복 주문번호 제거: 가장 첫 번째 orderId 기준으로 하나만 표시
+                Array.from(new Map(rows.map(row => [row.orderId, row])).values()).map((row, i) => (
                     <tr key={i} onClick={() => {
                       setSelectedOrderId(row.orderId);
-                      setShowOrderDetails(true); // 발주내역 표시
-                    }} style={{cursor: 'pointer'}}>
+                      setShowOrderDetails(true);
+                    }} style={{ cursor: 'pointer' }}>
                       <td className="text-center align-middle">{row.orderId}</td>
                       <td className="text-center align-middle">{row.branchId}</td>
                       <td className="text-center align-middle">{row.orderDate}</td>
@@ -133,7 +148,7 @@ function HQMainPanel( { filteredRows, isFiltered }) {
                       <td className="text-center align-middle">{row.orderStatus}</td>
                     </tr>
                 ))
-            )}
+              )}
             </tbody>
           </table>
         </div>
@@ -141,6 +156,7 @@ function HQMainPanel( { filteredRows, isFiltered }) {
         <hr></hr>
 
         {showOrderDetails && (
+            <>
             <div className="p-4 mt-3 bg-light w-100 overflow-auto">
               <h2 className="h5 fw-bold mt-1 mb-3">발주 내역</h2>
               <table className="table table-bordered">
@@ -238,9 +254,10 @@ function HQMainPanel( { filteredRows, isFiltered }) {
 
             </div>
 
-
+          <hr/>
+          </>
         )}
-        <hr></hr>
+
 
         {showApprovalModal && <ApprovalModal onClose={handleCloseModal} rows={rows} rows2={approvalData}/>}
       </div>
