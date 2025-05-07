@@ -1,6 +1,5 @@
 package bitc.fullstack503.server.mapper;
-import bitc.fullstack503.server.dto.OrderItemInfoDTO;
-import bitc.fullstack503.server.dto.TestDTO;
+import bitc.fullstack503.server.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,4 +10,10 @@ public interface HQMapper {
     List<OrderItemInfoDTO> findOrderItemsWithBranchAndParts();
 
     List<TestDTO> findTestsWithBranchAndParts();
+
+    List<FindPaymentDTO> findPayment();
+
+    List<OrderListDTO>  orderList();
+
+    List<OrderDTO> selectOrderList(OrderDTO dto);
 }

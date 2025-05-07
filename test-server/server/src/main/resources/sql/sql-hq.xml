@@ -4,22 +4,22 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bitc.fullstack503.server.mapper.HQMapper">
 
-<!--    미결제 리스트 -->
     <select id="findOrderItemsWithBranchAndParts" resultType="bitc.fullstack503.server.dto.OrderItemInfoDTO">
         SELECT
         b.branch_id,
         b.branch_name,
-        p.part_id,
+        oi.parts_id,
         p.part_name,
         oi.order_item_quantity,
         oi.order_item_price,
-        o.order_id,
         o.order_date,
-        o.order_status
+        o.order_status,
+        oi.order_id
         FROM order_item oi
         JOIN parts p ON oi.parts_id = p.part_id
         JOIN orders o ON oi.order_id = o.order_id
-        JOIN branch b ON o.branch_id = b.branch_id;
+        JOIN branch b ON o.branch_id = b.branch_id
+        WHERE o.order_status IN ('승인 대기');
     </select>
 
     <select id="findTestsWithBranchAndParts" resultType="bitc.fullstack503.server.dto.TestDTO">
@@ -31,5 +31,79 @@
         FROM branch b
         CROSS JOIN parts p
     </select>
+
+    <select id="findPayment" resultType="bitc.fullstack503.server.dto.FindPaymentDTO">
+        SELECT
+        o.order_id,
+        o.order_date,
+        p.part_name,
+        o.order_deny
+        FROM order_item oi
+        JOIN parts p ON oi.parts_id = p.part_id
+        JOIN orders o ON oi.order_id = o.order_id
+        WHERE o.order_deny IN ('결제', '반려');
+    </select>
+
+<!--    발주 내역 -->
+    <select id="orderList" resultType="bitc.fullstack503.server.dto.OrderListDTO">
+        SELECT
+        b.branch_id,
+        oi.parts_id,
+        p.part_name,
+        oi.order_item_quantity,
+        oi.order_item_price,
+        o.order_date,
+        o.order_status
+        FROM order_item oi
+        JOIN parts p ON oi.parts_id = p.part_id
+        JOIN orders o ON oi.order_id = o.order_id
+        JOIN branch b ON o.branch_id = b.branch_id
+        WHERE o.order_status IN ('승인 대기');
+    </select>
+
+<!--    조회 -->
+<!--    <select id="selectOrderList" resultType="OrderDTO">-->
+<!--        SELECT *-->
+<!--        FROM orders-->
+<!--        WHERE 1 = 1-->
+<!--        <if test="branchId != null and branchId != ''">-->
+<!--            AND branch_id = #{branchId}-->
+<!--        </if>-->
+<!--        <if test="branchName != null and branchName != ''">-->
+<!--            AND branch_name = #{branchName}-->
+<!--        </if>-->
+<!--        <if test="orderStatus != null and orderStatus != ''">-->
+<!--            AND order_status = #{orderStatus}-->
+<!--        </if>-->
+<!--        <if test="startDate != null and endDate != null">-->
+<!--            AND order_date BETWEEN #{startDate} AND #{endDate}-->
+<!--        </if>-->
+<!--    </select>-->
+
+
+    <select id="selectOrderList" resultType="bitc.fullstack503.server.dto.OrderDTO">
+<!--        SELECT o.*-->
+<!--        FROM orders o-->
+<!--        JOIN branch b ON o.branch_id = b.branch_id-->
+        SELECT o.branch_id, b.branch_name, o.order_status, o.order_date,  oi.parts_id, p.part_name, oi.order_item_quantity, oi.order_item_price, o.order_id, o.order_deny
+        FROM order_item oi
+        JOIN parts p ON oi.parts_id = p.part_id
+        JOIN orders o ON oi.order_id = o.order_id
+        JOIN branch b ON o.branch_id = b.branch_id
+        WHERE 1 = 1
+        <if test="branchId != null and branchId != ''">
+            AND o.branch_id = #{branchId}
+        </if>
+        <if test="branchName != null and branchName != ''">
+            AND b.branch_name = #{branchName}
+        </if>
+        <if test="orderStatus != null and orderStatus != ''">
+             AND o.order_status = #{orderStatus}
+        </if>
+        <if test="startDate != null and endDate != null">
+            AND o.order_date BETWEEN #{startDate} AND #{endDate}
+        </if>
+    </select>
+
 
 </mapper>
