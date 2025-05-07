@@ -15,7 +15,7 @@ import java.util.Date;
 public class OrderListDTO {
     private String branchId;
     private String branchName;
-    private String partsId;
+    private String partId;
     private String partName;
     private int orderItemQuantity;
     private BigDecimal orderItemPrice;

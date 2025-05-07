@@ -7,7 +7,7 @@ import java.util.List;
 public interface HQService {
 
 //    미결제 리스트
-    List<OrderItemInfoDTO> getOrderItemInfoList();
+    List<UnpaidListDTO> getOrderItemInfoList();
 
 //    발주 내역
     List<OrderListDTO> getOrderList();
@@ -16,7 +16,7 @@ public interface HQService {
     List<FindPaymentDTO> getFindPaymentList();
 
 //    조회 결과
-    List<OrderDTO> getFilteredOrders(OrderDTO dto);
+    List<SearchDTO> getFilteredOrders(SearchDTO dto);
 
     // 단일 주문 처리
     int updateOrderStatusAndDeny(String orderId, String orderStatus, String orderDeny);

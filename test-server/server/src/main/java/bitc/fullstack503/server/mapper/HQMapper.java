@@ -9,7 +9,7 @@ import java.util.List;
 public interface HQMapper {
 
 //    미결제 리스트
-    List<OrderItemInfoDTO> findOrderItemsWithBranchAndParts();
+    List<UnpaidListDTO> findOrderItemsWithBranchAndParts();
 
 //    결제 내역
     List<FindPaymentDTO> findPayment();
@@ -18,7 +18,7 @@ public interface HQMapper {
     List<OrderListDTO>  orderList();
 
 //    조회 결과
-    List<OrderDTO> selectOrderList(OrderDTO dto);
+    List<SearchDTO> selectOrderList(SearchDTO dto);
 
     // 단일 주문 처리
     int updateOrderStatusAndDeny(@Param("orderId") String orderId,

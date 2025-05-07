@@ -8,6 +8,10 @@ function HQMainPanel( { filteredRows, isFiltered }) {
 
   const [checkedOrderIds, setCheckedOrderIds] = useState([]);
 
+  const [selectedOrderId, setSelectedOrderId] = useState(null);  // 행 클릭
+
+  const [showOrderDetails, setShowOrderDetails] = useState(false); // 발주 내역 숨기기
+
   // const handleOpenModal = () => {
   //   if (checkedRows.length > 0) {
   //     setApprovalData(checkedRows); // 선택된 행만 모달로 전달
@@ -95,138 +99,155 @@ function HQMainPanel( { filteredRows, isFiltered }) {
           <table className="table table-bordered">
             <thead className="table-info">
             <tr>
-              <th className="text-center align-middle" rowSpan="2"  style={{width: '130px', height: '60px'}}>대리점 ID</th>
-              <th className="text-center align-middle" rowSpan="2"  style={{width: '130px', height: '60px'}}>지점명</th>
-              <th className="text-center align-middle" colSpan="2">부품</th>
-              <th className="text-center align-middle" colSpan="2">가격</th>
-              <th className="text-center align-middle"  rowSpan="2"   style={{width: '130px'}}>주문번호</th>
-              <th className="text-center align-middle"  rowSpan="2" style={{width: '130px'}}>주문일자</th>
-              <th className="text-center align-middle" rowSpan="2"  style={{width: '130px'}}>주문현황</th>
+              <th className="text-center align-middle" rowSpan="2" style={{width: '130px', height: '60px'}}>주문번호</th>
+              <th className="text-center align-middle" rowSpan="2" style={{width: '130px', height: '60px'}}>대리점 ID</th>
+              <th className="text-center align-middle" colSpan="2">일자</th>
+              {/*<th className="text-center align-middle" colSpan="2">가격</th>*/}
+              <th className="text-center align-middle" rowSpan="2" style={{width: '130px'}}>가격</th>
+              {/*<th className="text-center align-middle"  rowSpan="2" style={{width: '130px'}}>주문일자</th>*/}
+              <th className="text-center align-middle" rowSpan="2" style={{width: '130px'}}>주문현황</th>
             </tr>
             <tr>
-              <th className="text-center align-middle" style={{width: '130px'}}>부품 Code</th>
-              <th className="text-center align-middle" style={{width: '130px'}}>부품명</th>
-              <th className="text-center align-middle" style={{width: '130px'}}>수량</th>
-              <th className="text-center align-middle" style={{width: '130px'}}>비용</th>
+              <th className="text-center align-middle" style={{width: '130px'}}>주문날짜</th>
+              <th className="text-center align-middle" style={{width: '130px'}}>도착날짜</th>
+              {/*<th className="text-center align-middle" style={{width: '130px'}}>수량</th>*/}
+              {/*<th className="text-center align-middle" style={{width: '130px'}}>비용</th>*/}
             </tr>
             </thead>
             <tbody>
-              {rows.length === 0 ? (
-                  <tr>
-                    <td colSpan="9" className="text-center">미결제 리스트가 없습니다.</td>
-                  </tr>
-              ) : (
-                  rows.map((row, i) => (
-                      <tr key={i}>
-                        <td className="text-center align-middle">{row.branchId}</td>
-                        <td className="text-center align-middle">{row.branchName}</td>
-                        <td className="text-center align-middle">{row.partsId}</td>
-                        <td className="text-center align-middle">{row.partName}</td>
-                        <td className="text-center align-middle">{row.orderItemQuantity}</td>
-                        <td className="text-center align-middle">{row.orderItemPrice.toLocaleString()}</td>
-                        <td className="text-center align-middle">{row.orderId}</td>
-                        <td className="text-center align-middle">{row.orderDate}</td>
-                        <td className="text-center align-middle">{row.orderStatus}</td>
-                      </tr>
-                  ))
-              )}
+            {rows.length === 0 ? (
+                <tr>
+                  <td colSpan="9" className="text-center">미결제 리스트가 없습니다.</td>
+                </tr>
+            ) : (
+                rows.map((row, i) => (
+                    <tr key={i} onClick={() => {
+                      setSelectedOrderId(row.orderId);
+                      setShowOrderDetails(true); // 발주내역 표시
+                    }} style={{cursor: 'pointer'}}>
+                      <td className="text-center align-middle">{row.orderId}</td>
+                      <td className="text-center align-middle">{row.branchId}</td>
+                      <td className="text-center align-middle">{row.orderDate}</td>
+                      <td className="text-center align-middle">{row.orderDueDate}</td>
+                      <td className="text-center align-middle">{row.orderPrice.toLocaleString()}</td>
+                      <td className="text-center align-middle">{row.orderStatus}</td>
+                    </tr>
+                ))
+            )}
             </tbody>
           </table>
         </div>
 
         <hr></hr>
 
-        <div className="p-4 mt-3 bg-light w-100 overflow-auto">
-          <h2 className="h5 fw-bold mt-1 mb-3">발주 내역</h2>
-          <table className="table table-bordered">
-            <thead className="table-info">
-            <tr>
-              <th className="text-center align-middle" rowSpan="2" style={{width: '20px', height: '60px'}}></th>
-              <th className="text-center align-middle" rowSpan="2" style={{width: '130px', height: '60px'}}>대리점 ID</th>
-              <th className="text-center align-middle" colSpan="2">부품</th>
-              <th className="text-center align-middle" colSpan="2">가격</th>
-              <th className="text-center align-middle" rowSpan="2" style={{width: '130px'}}>주문일자</th>
-            </tr>
-            <tr>
-              <th className="text-center align-middle" style={{width: '130px'}}>부품 Code</th>
-              <th className="text-center align-middle" style={{width: '130px'}}>부품명</th>
-              <th className="text-center align-middle" style={{width: '130px'}}>수량</th>
-              <th className="text-center align-middle" style={{width: '130px'}}>비용</th>
-            </tr>
-            </thead>
-            <tbody>
-            {rows2.length === 0 ? (
+        {showOrderDetails && (
+            <div className="p-4 mt-3 bg-light w-100 overflow-auto">
+              <h2 className="h5 fw-bold mt-1 mb-3">발주 내역</h2>
+              <table className="table table-bordered">
+                <thead className="table-info">
                 <tr>
-                  <td colSpan="7" className="text-center">발주 내역이 없습니다.</td>
+                  <th className="text-center align-middle" rowSpan="2" style={{width: '20px', height: '60px'}}></th>
+                  <th className="text-center align-middle" rowSpan="2" style={{width: '130px', height: '60px'}}>대리점 ID
+                  </th>
+                  <th className="text-center align-middle" colSpan="2">부품</th>
+                  <th className="text-center align-middle" colSpan="2">가격</th>
+                  <th className="text-center align-middle" rowSpan="2" style={{width: '130px'}}>주문일자</th>
                 </tr>
-            ) : (
-                (() => {
-                  const renderedOrderIds = new Set();
+                <tr>
+                  <th className="text-center align-middle" style={{width: '130px'}}>부품 Code</th>
+                  <th className="text-center align-middle" style={{width: '130px'}}>부품명</th>
+                  <th className="text-center align-middle" style={{width: '130px'}}>수량</th>
+                  <th className="text-center align-middle" style={{width: '130px'}}>비용</th>
+                </tr>
+                </thead>
+                <tbody>
+                {rows2.length === 0 ? (
+                    <tr>
+                      <td colSpan="7" className="text-center">발주 내역이 없습니다.</td>
+                    </tr>
+                ) : (
+                    // (() => {
+                    //   const renderedOrderIds = new Set();
+                    //
+                    //   return rows2.map((row, i) => {
+                    //
+                    //
+                    //     const isFirst = !renderedOrderIds.has(row.orderId);
+                    //     renderedOrderIds.add(row.orderId);
+                    //
+                    //     return (
+                    //         <tr key={i}>
+                    //           <td className="text-center align-middle">
+                    //             {isFirst && (
+                    //                 <input
+                    //                     type="checkbox"
+                    //                     checked={checkedOrderIds.includes(row.orderId)}
+                    //                     onChange={() => handleCheckboxChange(row.orderId)}
+                    //                 />
+                    //             )}
+                    //           </td>
+                    //     <td className="text-center align-middle">{row.branchId}</td>
+                    //     <td className="text-center align-middle">{row.partId}</td>
+                    //     <td className="text-center align-middle">{row.partName}</td>
+                    //     <td className="text-center align-middle">{row.orderItemQuantity}</td>
+                    //           <td className="text-center align-middle">{row.orderItemPrice.toLocaleString()}</td>
+                    //           <td className="text-center align-middle">{row.orderDate}</td>
+                    //         </tr>
+                    //     );
+                    //   });
+                    // })()
+                    (() => {
+                      const renderedOrderIds = new Set();
+                      const filteredRows = selectedOrderId
+                          ? rows2.filter(row => row.orderId === selectedOrderId)
+                          : rows2;
 
-                  return rows2.map((row, i) => {
+                      return filteredRows.map((row, i) => {
+                        const isFirst = !renderedOrderIds.has(row.orderId);
+                        renderedOrderIds.add(row.orderId);
+
+                        return (
+                            <tr key={i}>
+                              <td className="text-center align-middle">
+                                {isFirst && (
+                                    <input
+                                        type="checkbox"
+                                        checked={checkedOrderIds.includes(row.orderId)}
+                                        onChange={() => handleCheckboxChange(row.orderId)}
+                                    />
+                                )}
+                              </td>
+                              <td className="text-center align-middle">{row.branchId}</td>
+                              <td className="text-center align-middle">{row.partId}</td>
+                              <td className="text-center align-middle">{row.partName}</td>
+                              <td className="text-center align-middle">{row.orderItemQuantity}</td>
+                              <td className="text-center align-middle">{row.orderItemPrice.toLocaleString()}</td>
+                              <td className="text-center align-middle">{row.orderDate}</td>
+                            </tr>
+                        );
+                      });
+                    })()
+
+                )}
+                </tbody>
+
+              </table>
+              <div className="mt-3 text-end">
+                <button className="btn btn-warning" onClick={handleOpenModal}>결제</button>
+              </div>
+
+            </div>
 
 
-                    const isFirst = !renderedOrderIds.has(row.orderId);
-                    renderedOrderIds.add(row.orderId);
-
-                    return (
-                        <tr key={i}>
-                          <td className="text-center align-middle">
-                            {isFirst && (
-                                <input
-                                    type="checkbox"
-                                    checked={checkedOrderIds.includes(row.orderId)}
-                                    onChange={() => handleCheckboxChange(row.orderId)}
-                                />
-                            )}
-                          </td>
-                    <td className="text-center align-middle">{row.branchId}</td>
-                    <td className="text-center align-middle">{row.partsId}</td>
-                    <td className="text-center align-middle">{row.partName}</td>
-                    <td className="text-center align-middle">{row.orderItemQuantity}</td>
-                          <td className="text-center align-middle">{row.orderItemPrice.toLocaleString()}</td>
-                          <td className="text-center align-middle">{row.orderDate}</td>
-                        </tr>
-                    );
-                  });
-                })()
-            )}
-            </tbody>
-
-          </table>
-          <div className="mt-3 text-end">
-            <button className="btn btn-warning" onClick={handleOpenModal}>결제</button>
-          </div>
-        </div>
-
+        )}
         <hr></hr>
 
         {showApprovalModal && <ApprovalModal onClose={handleCloseModal} rows={rows} rows2={approvalData}/>}
       </div>
+
   );
 
 }
-
-// ) : (
-//     rows2.map((row, i) => (
-//         <tr key={i}>
-//           <td className="text-center align-middle">
-//             <input
-//                 type="checkbox"
-//                 checked={checkedRows.includes(row)}
-//                 onChange={() => handleCheckboxChange(row)}
-//             />
-//           </td>
-//           <td className="text-center align-middle">{row.branchId}</td>
-//           <td className="text-center align-middle">{row.partsId}</td>
-//           <td className="text-center align-middle">{row.partName}</td>
-//           <td className="text-center align-middle">{row.orderItemQuantity}</td>
-//           <td className="text-center align-middle">{row.orderItemPrice}</td>
-//           <td className="text-center align-middle">{row.orderDate}</td>
-//         </tr>
-//     ))
-// )}
-
 
 function ApprovalModal({onClose, rows, rows2}) {
 
@@ -239,7 +260,7 @@ function ApprovalModal({onClose, rows, rows2}) {
   const uniqueByField = (field) => [...new Set(rows2.map(row => row[field]))].join(', ');
 
   const branchId = uniqueByField('branchId');
-  const partsId = uniqueByField('partsId');
+  const partId = uniqueByField('partId');
   const branchName = uniqueByField('branchName');
   const partName = uniqueByField('partName');
   const orderDate = uniqueByField('orderDate');
@@ -255,7 +276,7 @@ function ApprovalModal({onClose, rows, rows2}) {
     let requestBody;
 
     if (rows2.length === 1) {
-      //  단일 처리용: orderId 와 partsId 에 해당하는 것 하나만 전송
+      //  단일 처리용: orderId 와 partId 에 해당하는 것 하나만 전송
       requestBody = {
         orderId: rows2[0].orderId,
         orderStatus: status,
@@ -295,16 +316,16 @@ function ApprovalModal({onClose, rows, rows2}) {
               <button type="button" className="btn-close" onClick={onClose} aria-label="Close"></button>
             </div>
             <div className="modal-body">
-              <table className="table table-bordered">
+              <table className="table table-bordered" >
                 <tbody>
                 <tr>
-                  <th>대리점 ID</th>
-                  <td>{branchId}</td>
-                  <th>부품 Code</th>
-                  <td>{partsId}</td>
+                  <th style={ {whiteSpace: "nowrap"}}>대리점 ID</th>
+                  <td style={ {whiteSpace: "nowrap"}}>{branchId}</td>
+                  <th style={ {whiteSpace: "nowrap"}}>부품 Code</th>
+                  <td>{partId}</td>
                 </tr>
                 <tr>
-                  <th>지점명</th>
+                  <th style={ {whiteSpace: "nowrap"}}>지점명</th>
                   <td colSpan={3}>{branchName}</td>
                 </tr>
                 <tr>
@@ -335,3 +356,23 @@ function ApprovalModal({onClose, rows, rows2}) {
 export default HQMainPanel
 
 
+
+// ) : (
+//     rows2.map((row, i) => (
+//         <tr key={i}>
+//           <td className="text-center align-middle">
+//             <input
+//                 type="checkbox"
+//                 checked={checkedRows.includes(row)}
+//                 onChange={() => handleCheckboxChange(row)}
+//             />
+//           </td>
+//           <td className="text-center align-middle">{row.branchId}</td>
+//           <td className="text-center align-middle">{row.partId}</td>
+//           <td className="text-center align-middle">{row.partName}</td>
+//           <td className="text-center align-middle">{row.orderItemQuantity}</td>
+//           <td className="text-center align-middle">{row.orderItemPrice}</td>
+//           <td className="text-center align-middle">{row.orderDate}</td>
+//         </tr>
+//     ))
+// )}

@@ -18,8 +18,9 @@ public class UnpaidListDTO {
     private String partsId;
     private String partName;
     private int orderItemQuantity;
-    private BigDecimal orderItemPrice;
+    private BigDecimal orderPrice;
     private Date orderDate;
+    private Date orderDueDate;
     private String orderStatus;
     private String orderId;
 

@@ -14,7 +14,7 @@ public class HQServiceImpl implements HQService {
 
 //    미결제 리스트
     @Override
-    public List<OrderItemInfoDTO> getOrderItemInfoList() {
+    public List<UnpaidListDTO> getOrderItemInfoList() {
         return hqMapper.findOrderItemsWithBranchAndParts();
     }
 
@@ -32,7 +32,7 @@ public class HQServiceImpl implements HQService {
 
 //    조회 결과
     @Override
-    public List<OrderDTO> getFilteredOrders(OrderDTO dto) {
+    public List<SearchDTO> getFilteredOrders(SearchDTO dto) {
         return hqMapper.selectOrderList(dto);
     }
 

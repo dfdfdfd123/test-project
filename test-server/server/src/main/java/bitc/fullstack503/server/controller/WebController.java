@@ -26,7 +26,7 @@ public class WebController {
 
     // 미결제 리스트
     @GetMapping("/order-item-info")
-    public List<OrderItemInfoDTO> getOrderItemInfoList() {
+    public List<UnpaidListDTO> getOrderItemInfoList() {
         return hqService.getOrderItemInfoList();
     }
 
@@ -44,7 +44,7 @@ public class WebController {
 
 //    검색
 @PostMapping("/search")
-public List<OrderDTO> searchOrders(@RequestBody OrderDTO dto) {
+public List<SearchDTO> searchOrders(@RequestBody SearchDTO dto) {
     System.out.println("Received search params: " + dto);
     return hqService.getFilteredOrders(dto);
 }
