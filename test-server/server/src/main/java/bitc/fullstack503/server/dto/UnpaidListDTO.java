@@ -12,7 +12,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderItemInfoDTO {
+public class UnpaidListDTO {
     private String branchId;
     private String branchName;
     private String partsId;
