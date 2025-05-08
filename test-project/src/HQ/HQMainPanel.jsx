@@ -295,7 +295,7 @@ function ApprovalModal({onClose, rows, rows2, denyReason, setDenyReason}) {
   const orderDate = uniqueByField('orderDate');
 
   const handleApproval = (type) => {
-    const status = type === '결제' ? '승인' : '반려';
+    const status = type === '결제' ? '결제' : '반려';
 
     // let status = '';
     // let orderItemStatus = '';
