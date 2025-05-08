@@ -62,6 +62,26 @@
         WHERE o.order_deny IN ('결제', '반려');
     </select>
 
+<!--    결제 or 반려 상세 -->
+    <select id ="findPaymentDetail" resultType="bitc.fullstack503.server.dto.FindPaymentDetailDTO">
+        SELECT
+        b.branch_id,
+        b.branch_name,
+        oi.part_id,
+        p.part_name,
+        oi.order_item_quantity,
+        oi.order_item_price,
+        o.order_date,
+        o.order_deny,
+        o.order_id,
+        o.order_status
+        FROM order_item oi
+        JOIN parts p ON oi.part_id = p.part_id
+        JOIN orders o ON oi.order_id = o.order_id
+        JOIN branch b ON o.branch_id = b.branch_id
+        WHERE o.order_deny IN ('결제', '반려');
+    </select>
+
 
 <!--    조회 -->
     <select id="selectOrderList" resultType="bitc.fullstack503.server.dto.SearchDTO">
@@ -104,18 +124,14 @@
         WHERE
         order_id = #{orderId}
 
-
 <!--        UPDATE order_item oi-->
-<!--        JOIN parts p ON oi.part_id = p.part_id-->
 <!--        JOIN orders o ON oi.order_id = o.order_id-->
-<!--        JOIN branch b ON o.branch_id = b.branch_id-->
 <!--        SET-->
 <!--        o.order_status = #{orderStatus},-->
-<!--        o.order_deny = #{orderDeny}-->
+<!--        o.order_deny = #{orderDeny},-->
+<!--        oi.order_item_status = #{orderItemStatus}-->
 <!--        WHERE-->
 <!--        oi.order_id = #{orderId}-->
-<!--        and oi.part_id = #{partsId};-->
-
 
     </update>
 

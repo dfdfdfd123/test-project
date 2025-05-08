@@ -30,7 +30,13 @@ public class HQServiceImpl implements HQService {
         return hqMapper.findPayment();
     }
 
-//    조회 결과
+//    결제, 반려 상세
+    @Override
+    public List<FindPaymentDetailDTO> getFindPaymentDetailList() {
+        return hqMapper.findPaymentDetail();
+    }
+
+    //    조회 결과
     @Override
     public List<SearchDTO> getFilteredOrders(SearchDTO dto) {
         return hqMapper.selectOrderList(dto);

@@ -15,6 +15,9 @@ public interface HQService {
 //    결제나 반려된 것
     List<FindPaymentDTO> getFindPaymentList();
 
+//    결제, 반려 상세
+    List<FindPaymentDetailDTO> getFindPaymentDetailList();
+
 //    조회 결과
     List<SearchDTO> getFilteredOrders(SearchDTO dto);
 

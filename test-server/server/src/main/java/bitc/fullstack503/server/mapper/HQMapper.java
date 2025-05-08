@@ -14,7 +14,10 @@ public interface HQMapper {
 //    결제 내역
     List<FindPaymentDTO> findPayment();
 
-//    발주
+    //    결제 내역 상세
+    List<FindPaymentDetailDTO> findPaymentDetail();
+
+//    발주 내역
     List<OrderListDTO>  orderList();
 
 //    조회 결과
@@ -25,6 +28,7 @@ public interface HQMapper {
 //                                 @Param("partsId") String partsId,
                                  @Param("orderStatus") String orderStatus,
                                  @Param("orderDeny") String orderDeny);
+//                                    @Param("orderItemStatus") String orderItemStatus);
 
     // 복수 주문 처리
     int updateMultipleOrderStatusAndDeny(@Param("orderIdList") List<String> orderIdList,

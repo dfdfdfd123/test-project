@@ -42,6 +42,11 @@ public class WebController {
         return hqService.getFindPaymentList();
     }
 
+//    결제 or 반려 상세
+    @GetMapping("/paymentDetail")
+    public List<FindPaymentDetailDTO> getFindPaymentDetailList() { return hqService.getFindPaymentDetailList();}
+
+
 //    검색
 @PostMapping("/search")
 public List<SearchDTO> searchOrders(@RequestBody SearchDTO dto) {

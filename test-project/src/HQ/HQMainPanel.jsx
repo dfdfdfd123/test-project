@@ -6,11 +6,14 @@ function HQMainPanel( { filteredRows, isFiltered }) {
   const [showApprovalModal, setShowApprovalModal] = useState(false);
   const [approvalData, setApprovalData] = useState([]);
 
-  const [checkedOrderIds, setCheckedOrderIds] = useState([]);
+
+  // const [checkedOrderIds, setCheckedOrderIds] = useState([]);
 
   const [selectedOrderId, setSelectedOrderId] = useState(null);  // 행 클릭
 
   const [showOrderDetails, setShowOrderDetails] = useState(false); // 발주 내역 숨기기
+
+  const [denyReason, setDenyReason] = useState("");
 
   // const handleOpenModal = () => {
   //   if (checkedRows.length > 0) {
@@ -21,37 +24,49 @@ function HQMainPanel( { filteredRows, isFiltered }) {
   //   setShowApprovalModal(true);
   // };
 
+  // const handleOpenModal = () => {
+  //   const selectedRows = rows2.filter(row => checkedOrderIds.includes(row.orderId));
+  //   setApprovalData(selectedRows.length > 0 ? selectedRows : rows2);
+  //   setApprovalData(rows2);
+  //   setShowApprovalModal(true);
+  // };
+
+  // 마지막 꺼
+
+  // const handleOpenModal = () => {
+  //   const selectedRows = rows2.filter(row => checkedOrderIds.includes(row.orderId));
+  //
+  //   if (selectedRows.length > 0) {
+  //     setApprovalData(selectedRows);
+  //   } else if (selectedOrderId !== null) {
+  //     const orderRows = rows2.filter(row => row.orderId === selectedOrderId);
+  //     setApprovalData(orderRows);
+  //   } else {
+  //     setApprovalData(rows2);  // 예외 케이스: 아무것도 선택되지 않음
+  //   }
+  //
+  //   setShowApprovalModal(true);
+  // };
+
   const handleOpenModal = () => {
-    const selectedRows = rows2.filter(row => checkedOrderIds.includes(row.orderId));
-    setApprovalData(selectedRows.length > 0 ? selectedRows : rows2);
+    const selectedRows = rows2.filter(row => row.orderId === selectedOrderId);
+    setApprovalData(selectedRows.length > 0 ? selectedRows : []);
     setShowApprovalModal(true);
   };
 
-
   const handleCloseModal = () => setShowApprovalModal(false);
 
-  // const [checkedRows, setCheckedRows] = useState([]);
 
-  // const handleCheckboxChange = (row) => {
-  //   setCheckedRows(prev => {
-  //     const exists = prev.find(r => r === row);
-  //     if (exists) {
-  //       return prev.filter(r => r !== row); // 체크 해제
+
+  // const handleCheckboxChange = (orderId) => {
+  //   setCheckedOrderIds(prev => {
+  //     if (prev.includes(orderId)) {
+  //       return prev.filter(id => id !== orderId);
   //     } else {
-  //       return [...prev, row]; // 체크
+  //       return [...prev, orderId];
   //     }
   //   });
   // };
-
-  const handleCheckboxChange = (orderId) => {
-    setCheckedOrderIds(prev => {
-      if (prev.includes(orderId)) {
-        return prev.filter(id => id !== orderId);
-      } else {
-        return [...prev, orderId];
-      }
-    });
-  };
 
 
   const [rows, setRows] = useState([]);
@@ -108,8 +123,8 @@ function HQMainPanel( { filteredRows, isFiltered }) {
               <th className="text-center align-middle" rowSpan="2" style={{width: '130px'}}>주문현황</th>
             </tr>
             <tr>
-              <th className="text-center align-middle" style={{width: '130px'}}>주문날짜</th>
-              <th className="text-center align-middle" style={{width: '130px'}}>도착날짜</th>
+              <th className="text-center align-middle" style={{width: '130px'}}>주문일자</th>
+              <th className="text-center align-middle" style={{width: '130px'}}>도착일자</th>
               {/*<th className="text-center align-middle" style={{width: '130px'}}>수량</th>*/}
               {/*<th className="text-center align-middle" style={{width: '130px'}}>비용</th>*/}
             </tr>
@@ -120,25 +135,18 @@ function HQMainPanel( { filteredRows, isFiltered }) {
                   <td colSpan="9" className="text-center">미결제 리스트가 없습니다.</td>
                 </tr>
             ) : (
-            //     rows.map((row, i) => (
-            //         <tr key={i} onClick={() => {
-            //           setSelectedOrderId(row.orderId);
-            //           setShowOrderDetails(true); // 발주내역 표시
-            //         }} style={{cursor: 'pointer'}}>
-            //           <td className="text-center align-middle">{row.orderId}</td>
-            //           <td className="text-center align-middle">{row.branchId}</td>
-            //           <td className="text-center align-middle">{row.orderDate}</td>
-            //           <td className="text-center align-middle">{row.orderDueDate}</td>
-            //           <td className="text-center align-middle">{row.orderPrice.toLocaleString()}</td>
-            //           <td className="text-center align-middle">{row.orderStatus}</td>
-            //         </tr>
-            //     ))
-            // )}
                 // 중복 주문번호 제거: 가장 첫 번째 orderId 기준으로 하나만 표시
                 Array.from(new Map(rows.map(row => [row.orderId, row])).values()).map((row, i) => (
                     <tr key={i} onClick={() => {
-                      setSelectedOrderId(row.orderId);
-                      setShowOrderDetails(true);
+                      if (selectedOrderId === row.orderId) {
+                        // 이미 선택된 경우 → 선택 해제
+                        setSelectedOrderId(null);
+                        setShowOrderDetails(false);
+                      } else {
+                        // 새로 선택한 경우
+                        setSelectedOrderId(row.orderId);
+                        setShowOrderDetails(true);
+                      }
                     }} style={{ cursor: 'pointer' }}>
                       <td className="text-center align-middle">{row.orderId}</td>
                       <td className="text-center align-middle">{row.branchId}</td>
@@ -162,7 +170,7 @@ function HQMainPanel( { filteredRows, isFiltered }) {
               <table className="table table-bordered">
                 <thead className="table-info">
                 <tr>
-                  <th className="text-center align-middle" rowSpan="2" style={{width: '20px', height: '60px'}}></th>
+                  {/*<th className="text-center align-middle" rowSpan="2" style={{width: '20px', height: '60px'}}></th>*/}
                   <th className="text-center align-middle" rowSpan="2" style={{width: '130px', height: '60px'}}>대리점 ID
                   </th>
                   <th className="text-center align-middle" colSpan="2">부품</th>
@@ -182,57 +190,26 @@ function HQMainPanel( { filteredRows, isFiltered }) {
                       <td colSpan="7" className="text-center">발주 내역이 없습니다.</td>
                     </tr>
                 ) : (
-                    // (() => {
-                    //   const renderedOrderIds = new Set();
-                    //
-                    //   return rows2.map((row, i) => {
-                    //
-                    //
-                    //     const isFirst = !renderedOrderIds.has(row.orderId);
-                    //     renderedOrderIds.add(row.orderId);
-                    //
-                    //     return (
-                    //         <tr key={i}>
-                    //           <td className="text-center align-middle">
-                    //             {isFirst && (
-                    //                 <input
-                    //                     type="checkbox"
-                    //                     checked={checkedOrderIds.includes(row.orderId)}
-                    //                     onChange={() => handleCheckboxChange(row.orderId)}
-                    //                 />
-                    //             )}
-                    //           </td>
-                    //     <td className="text-center align-middle">{row.branchId}</td>
-                    //     <td className="text-center align-middle">{row.partId}</td>
-                    //     <td className="text-center align-middle">{row.partName}</td>
-                    //     <td className="text-center align-middle">{row.orderItemQuantity}</td>
-                    //           <td className="text-center align-middle">{row.orderItemPrice.toLocaleString()}</td>
-                    //           <td className="text-center align-middle">{row.orderDate}</td>
-                    //         </tr>
-                    //     );
-                    //   });
-                    // })()
                     (() => {
                       const renderedOrderIds = new Set();
-                      const filteredRows = selectedOrderId
-                          ? rows2.filter(row => row.orderId === selectedOrderId)
-                          : rows2;
 
-                      return filteredRows.map((row, i) => {
-                        const isFirst = !renderedOrderIds.has(row.orderId);
+                      // return rows2.map((row, i) => {
+                      //   const isFirst = !renderedOrderIds.has(row.orderId);
+                      //   renderedOrderIds.add(row.orderId);
+
+                      // ✅ selectedOrderId로 필터링
+                      const filteredRows2 = rows2.filter(row => row.orderId === selectedOrderId);
+
+                      return filteredRows2.map((row, i) => {
                         renderedOrderIds.add(row.orderId);
 
                         return (
-                            <tr key={i}>
-                              <td className="text-center align-middle">
-                                {isFirst && (
-                                    <input
-                                        type="checkbox"
-                                        checked={checkedOrderIds.includes(row.orderId)}
-                                        onChange={() => handleCheckboxChange(row.orderId)}
-                                    />
-                                )}
-                              </td>
+                            <tr
+                                key={i}
+                                style={{ cursor: 'pointer', backgroundColor: selectedOrderId === row.orderId ? '#ffe8a1' : '' }}
+                                onClick={() => setSelectedOrderId(row.orderId)}
+                            >
+                              {/* 체크박스 셀 제거 */}
                               <td className="text-center align-middle">{row.branchId}</td>
                               <td className="text-center align-middle">{row.partId}</td>
                               <td className="text-center align-middle">{row.partName}</td>
@@ -243,8 +220,41 @@ function HQMainPanel( { filteredRows, isFiltered }) {
                         );
                       });
                     })()
-
                 )}
+
+
+                {/*       const renderedOrderIds = new Set();*/}
+                {/*       const filteredRows = selectedOrderId*/}
+                {/*           ? rows2.filter(row => row.orderId === selectedOrderId)*/}
+                {/*           : rows2;*/}
+
+                {/*      return filteredRows.map((row, i) => {*/}
+                {/*        const isFirst = !renderedOrderIds.has(row.orderId);*/}
+                {/*        renderedOrderIds.add(row.orderId);*/}
+
+                {/*        return (*/}
+                {/*            <tr key={i}>*/}
+                {/*              <td className="text-center align-middle">*/}
+                {/*                {isFirst && (*/}
+                {/*                    <input*/}
+                {/*                        type="checkbox"*/}
+                {/*                        checked={checkedOrderIds.includes(row.orderId)}*/}
+                {/*                        onChange={() => handleCheckboxChange(row.orderId)}*/}
+                {/*                    />*/}
+                {/*                )}*/}
+                {/*              </td>*/}
+                {/*              <td className="text-center align-middle" >{row.branchId}</td>*/}
+                {/*              <td className="text-center align-middle">{row.partId}</td>*/}
+                {/*              <td className="text-center align-middle">{row.partName}</td>*/}
+                {/*              <td className="text-center align-middle">{row.orderItemQuantity}</td>*/}
+                {/*              <td className="text-center align-middle">{row.orderItemPrice.toLocaleString()}</td>*/}
+                {/*              <td className="text-center align-middle">{row.orderDate}</td>*/}
+                {/*            </tr>*/}
+                {/*        );*/}
+                {/*      });*/}
+                {/*    })()*/}
+
+                {/*)}*/}
                 </tbody>
 
               </table>
@@ -259,14 +269,14 @@ function HQMainPanel( { filteredRows, isFiltered }) {
         )}
 
 
-        {showApprovalModal && <ApprovalModal onClose={handleCloseModal} rows={rows} rows2={approvalData}/>}
+        {showApprovalModal && <ApprovalModal onClose={handleCloseModal} rows={rows} rows2={approvalData} denyReason={denyReason} setDenyReason={setDenyReason}  />}
       </div>
 
   );
 
 }
 
-function ApprovalModal({onClose, rows, rows2}) {
+function ApprovalModal({onClose, rows, rows2, denyReason, setDenyReason}) {
 
   if (!rows || rows.length === 0) return null;
 
@@ -276,6 +286,8 @@ function ApprovalModal({onClose, rows, rows2}) {
   // const uniqueByField1 = (field) => [...new Set(rows.map(row => row[field]))].join(', ');
   const uniqueByField = (field) => [...new Set(rows2.map(row => row[field]))].join(', ');
 
+
+
   const branchId = uniqueByField('branchId');
   const partId = uniqueByField('partId');
   const branchName = uniqueByField('branchName');
@@ -283,10 +295,27 @@ function ApprovalModal({onClose, rows, rows2}) {
   const orderDate = uniqueByField('orderDate');
 
   const handleApproval = (type) => {
-    const status = type === '결제' ? '승인' : '거부';
+    const status = type === '결제' ? '승인' : '반려';
+
+    // let status = '';
+    // let orderItemStatus = '';
+    //
+    // if (type === '결제') {
+    //   status = '승인';
+    //   orderItemStatus = '출고완료';
+    // } else {
+    //   status = '거부';
+    //   orderItemStatus = '반려';
+    // }
 
     if (rows2.length === 0) {
       alert("선택된 주문이 없습니다.");
+      return;
+    }
+
+    // 반려일 때 이유 미입력 시 알림
+    if (type === '반려' && denyReason.trim() === '') {
+      alert("반려 이유를 입력하세요.");
       return;
     }
 
@@ -297,7 +326,8 @@ function ApprovalModal({onClose, rows, rows2}) {
       requestBody = {
         orderId: rows2[0].orderId,
         orderStatus: status,
-        orderDeny: type,
+        orderDeny: denyReason,
+        // orderItemStatus: orderItemStatus
       };
     } else {
       //  복수 처리용: orderIdList 전송
@@ -305,7 +335,7 @@ function ApprovalModal({onClose, rows, rows2}) {
       requestBody = {
         orderIdList: orderIdList,
         orderStatus: status,
-        orderDeny: type,
+        orderDeny: denyReason,
       };
     }
 
@@ -355,10 +385,10 @@ function ApprovalModal({onClose, rows, rows2}) {
                 </tr>
                 </tbody>
               </table>
-              {/*<div className="form-group">*/}
-              {/*  <label className="form-label fw-bold">결제 의견</label>*/}
-              {/*  <input type="text" className="form-control" placeholder="무슨무슨이유로 인해 반려합니다." />*/}
-              {/*</div>*/}
+              <div className="form-group">
+                <label className="form-label fw-bold">반려 이유</label>
+                <input type="text" className="form-control" placeholder="무슨무슨이유로 인해 반려합니다." value={denyReason}   onChange={(e) => setDenyReason(e.target.value)} />
+              </div>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-primary" onClick={() => handleApproval('결제')}>결제</button>
