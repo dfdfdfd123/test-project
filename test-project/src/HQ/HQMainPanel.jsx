@@ -7,46 +7,12 @@ function HQMainPanel( { filteredRows, isFiltered }) {
   const [approvalData, setApprovalData] = useState([]);
 
 
-  // const [checkedOrderIds, setCheckedOrderIds] = useState([]);
-
   const [selectedOrderId, setSelectedOrderId] = useState(null);  // 행 클릭
 
   const [showOrderDetails, setShowOrderDetails] = useState(false); // 발주 내역 숨기기
 
   const [denyReason, setDenyReason] = useState("");
 
-  // const handleOpenModal = () => {
-  //   if (checkedRows.length > 0) {
-  //     setApprovalData(checkedRows); // 선택된 행만 모달로 전달
-  //   } else {
-  //     setApprovalData(rows2); // 아무 것도 선택되지 않았으면 전체 전달
-  //   }
-  //   setShowApprovalModal(true);
-  // };
-
-  // const handleOpenModal = () => {
-  //   const selectedRows = rows2.filter(row => checkedOrderIds.includes(row.orderId));
-  //   setApprovalData(selectedRows.length > 0 ? selectedRows : rows2);
-  //   setApprovalData(rows2);
-  //   setShowApprovalModal(true);
-  // };
-
-  // 마지막 꺼
-
-  // const handleOpenModal = () => {
-  //   const selectedRows = rows2.filter(row => checkedOrderIds.includes(row.orderId));
-  //
-  //   if (selectedRows.length > 0) {
-  //     setApprovalData(selectedRows);
-  //   } else if (selectedOrderId !== null) {
-  //     const orderRows = rows2.filter(row => row.orderId === selectedOrderId);
-  //     setApprovalData(orderRows);
-  //   } else {
-  //     setApprovalData(rows2);  // 예외 케이스: 아무것도 선택되지 않음
-  //   }
-  //
-  //   setShowApprovalModal(true);
-  // };
 
   const handleOpenModal = () => {
     const selectedRows = rows2.filter(row => row.orderId === selectedOrderId);
@@ -55,18 +21,6 @@ function HQMainPanel( { filteredRows, isFiltered }) {
   };
 
   const handleCloseModal = () => setShowApprovalModal(false);
-
-
-
-  // const handleCheckboxChange = (orderId) => {
-  //   setCheckedOrderIds(prev => {
-  //     if (prev.includes(orderId)) {
-  //       return prev.filter(id => id !== orderId);
-  //     } else {
-  //       return [...prev, orderId];
-  //     }
-  //   });
-  // };
 
 
   const [rows, setRows] = useState([]);
@@ -117,16 +71,12 @@ function HQMainPanel( { filteredRows, isFiltered }) {
               <th className="text-center align-middle"  rowSpan="2" style={{width: '130px', height: '60px', backgroundColor: "#E3F0FF" }}>주문번호</th>
               <th className="text-center align-middle" rowSpan="2" style={{width: '130px', height: '60px', backgroundColor: "#E3F0FF"}}>대리점 ID</th>
               <th className="text-center align-middle" colSpan="2" style={{backgroundColor: "#E3F0FF"}}>일자</th>
-              {/*<th className="text-center align-middle" colSpan="2">가격</th>*/}
               <th className="text-center align-middle" rowSpan="2" style={{width: '130px', backgroundColor: "#E3F0FF"}}>가격</th>
-              {/*<th className="text-center align-middle"  rowSpan="2" style={{width: '130px'}}>주문일자</th>*/}
               <th className="text-center align-middle" rowSpan="2" style={{width: '130px', backgroundColor: "#E3F0FF"}}>주문현황</th>
             </tr>
             <tr>
               <th className="text-center align-middle" style={{width: '130px', backgroundColor: "#E3F0FF"}}>주문일자</th>
               <th className="text-center align-middle" style={{width: '130px', backgroundColor: "#E3F0FF"}}>도착일자</th>
-              {/*<th className="text-center align-middle" style={{width: '130px'}}>수량</th>*/}
-              {/*<th className="text-center align-middle" style={{width: '130px'}}>비용</th>*/}
             </tr>
             </thead>
             <tbody>
@@ -193,9 +143,6 @@ function HQMainPanel( { filteredRows, isFiltered }) {
                     (() => {
                       const renderedOrderIds = new Set();
 
-                      // return rows2.map((row, i) => {
-                      //   const isFirst = !renderedOrderIds.has(row.orderId);
-                      //   renderedOrderIds.add(row.orderId);
 
                       // ✅ selectedOrderId로 필터링
                       const filteredRows2 = rows2.filter(row => row.orderId === selectedOrderId);
@@ -221,40 +168,6 @@ function HQMainPanel( { filteredRows, isFiltered }) {
                       });
                     })()
                 )}
-
-
-                {/*       const renderedOrderIds = new Set();*/}
-                {/*       const filteredRows = selectedOrderId*/}
-                {/*           ? rows2.filter(row => row.orderId === selectedOrderId)*/}
-                {/*           : rows2;*/}
-
-                {/*      return filteredRows.map((row, i) => {*/}
-                {/*        const isFirst = !renderedOrderIds.has(row.orderId);*/}
-                {/*        renderedOrderIds.add(row.orderId);*/}
-
-                {/*        return (*/}
-                {/*            <tr key={i}>*/}
-                {/*              <td className="text-center align-middle">*/}
-                {/*                {isFirst && (*/}
-                {/*                    <input*/}
-                {/*                        type="checkbox"*/}
-                {/*                        checked={checkedOrderIds.includes(row.orderId)}*/}
-                {/*                        onChange={() => handleCheckboxChange(row.orderId)}*/}
-                {/*                    />*/}
-                {/*                )}*/}
-                {/*              </td>*/}
-                {/*              <td className="text-center align-middle" >{row.branchId}</td>*/}
-                {/*              <td className="text-center align-middle">{row.partId}</td>*/}
-                {/*              <td className="text-center align-middle">{row.partName}</td>*/}
-                {/*              <td className="text-center align-middle">{row.orderItemQuantity}</td>*/}
-                {/*              <td className="text-center align-middle">{row.orderItemPrice.toLocaleString()}</td>*/}
-                {/*              <td className="text-center align-middle">{row.orderDate}</td>*/}
-                {/*            </tr>*/}
-                {/*        );*/}
-                {/*      });*/}
-                {/*    })()*/}
-
-                {/*)}*/}
                 </tbody>
 
               </table>
@@ -285,7 +198,6 @@ function ApprovalModal({onClose, rows, rows2, denyReason, setDenyReason}) {
   if (!rows2 || rows2.length === 0) return null;
 
   // 중복 제거 및 필드별 콤마로 구분된 값 생성
-  // const uniqueByField1 = (field) => [...new Set(rows.map(row => row[field]))].join(', ');
   const uniqueByField = (field) => [...new Set(rows2.map(row => row[field]))].join(', ');
 
 
@@ -298,17 +210,6 @@ function ApprovalModal({onClose, rows, rows2, denyReason, setDenyReason}) {
   const handleApproval = (type) => {
     const status = type === '결제' ? '결제' : '반려';
     const finalDenyReason = type === '결제' ? '결제되었습니다.' : denyReason;
-
-    // let status = '';
-    // let orderItemStatus = '';
-    //
-    // if (type === '결제') {
-    //   status = '승인';
-    //   orderItemStatus = '출고완료';
-    // } else {
-    //   status = '거부';
-    //   orderItemStatus = '반려';
-    // }
 
     if (rows2.length === 0) {
       alert("선택된 주문이 없습니다.");
@@ -329,7 +230,6 @@ function ApprovalModal({onClose, rows, rows2, denyReason, setDenyReason}) {
         orderId: rows2[0].orderId,
         orderStatus: status,
         orderDeny: finalDenyReason,
-        // orderItemStatus: orderItemStatus
       };
     } else {
       //  복수 처리용: orderIdList 전송
@@ -405,23 +305,3 @@ function ApprovalModal({onClose, rows, rows2, denyReason, setDenyReason}) {
 export default HQMainPanel
 
 
-
-// ) : (
-//     rows2.map((row, i) => (
-//         <tr key={i}>
-//           <td className="text-center align-middle">
-//             <input
-//                 type="checkbox"
-//                 checked={checkedRows.includes(row)}
-//                 onChange={() => handleCheckboxChange(row)}
-//             />
-//           </td>
-//           <td className="text-center align-middle">{row.branchId}</td>
-//           <td className="text-center align-middle">{row.partId}</td>
-//           <td className="text-center align-middle">{row.partName}</td>
-//           <td className="text-center align-middle">{row.orderItemQuantity}</td>
-//           <td className="text-center align-middle">{row.orderItemPrice}</td>
-//           <td className="text-center align-middle">{row.orderDate}</td>
-//         </tr>
-//     ))
-// )}

@@ -5,11 +5,9 @@ function HQPaymentCheck({ filteredRows, isFiltered }) {
 
 
     const [rows, setRows] = useState([]);
-
     const [rows2, setRows2] = useState([]);
 
     const [selectedOrderId, setSelectedOrderId] = useState(null);  // 행 클릭
-
     const [showOrderDetails, setShowOrderDetails] = useState(false); // 상세 내역 숨기기
 
 
@@ -107,25 +105,6 @@ function HQPaymentCheck({ filteredRows, isFiltered }) {
                             </tr>
                         ))
                     )}
-                    {/*{rows.length === 0 ? (*/}
-                    {/*    <tr>*/}
-                    {/*        <td colSpan="4" className="text-center">처리된 것이 없습니다.</td>*/}
-                    {/*    </tr>*/}
-                    {/*) : (*/}
-                    {/*    // rows.map((row, i) => (*/}
-                    {/*    Array.from(new Map(rows.map(row => [row.orderId, row])).values()).map((row, i) => (*/}
-
-                    {/*        <tr key={i} onClick={() => {*/}
-                    {/*            setSelectedOrderId(row.orderId);*/}
-                    {/*            setShowOrderDetails(true);*/}
-                    {/*        }} style={{ cursor: 'pointer' }}>*/}
-                    {/*            <td className="text-center align-middle">{row.orderId}</td>*/}
-                    {/*            <td className="text-center align-middle">{row.orderDate}</td>*/}
-                    {/*            <td className="text-center align-middle">{row.partName}</td>*/}
-                    {/*            <td className="text-center align-middle">{row.orderDeny}</td>*/}
-                    {/*        </tr>*/}
-                    {/*    ))*/}
-                    {/*)}*/}
                     </tbody>
                 </table>
             </div>
@@ -139,7 +118,6 @@ function HQPaymentCheck({ filteredRows, isFiltered }) {
                         <table className="table table-bordered">
                             <thead className="table-info">
                             <tr>
-                                {/*<th className="text-center align-middle" rowSpan="2" style={{width: '20px', height: '60px'}}></th>*/}
                                 <th className="text-center align-middle" rowSpan="2" style={{width: '130px', height: '60px', backgroundColor: "#E3F0FF"}}>대리점 ID
                                 </th>
                                 <th className="text-center align-middle" colSpan="2" style={{backgroundColor: "#E3F0FF"}}>부품</th>
@@ -162,7 +140,7 @@ function HQPaymentCheck({ filteredRows, isFiltered }) {
                                 (() => {
                                     const renderedOrderIds = new Set();
 
-                                    // ✅ selectedOrderId로 필터링
+                                    // selectedOrderId로 필터링
                                     const filteredRows2 = rows2.filter(row => row.orderId === selectedOrderId);
 
                                     return filteredRows2.map((row, i) => {

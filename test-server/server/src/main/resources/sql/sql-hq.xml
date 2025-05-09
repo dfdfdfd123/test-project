@@ -6,27 +6,9 @@
 
 <!--    미결제 리스트 -->
     <select id="findOrderItemsWithBranchAndParts" resultType="bitc.fullstack503.server.dto.UnpaidListDTO">
-<!--        SELECT-->
-<!--        b.branch_name,-->
-<!--        p.part_name,-->
-<!--        o.order_id,-->
-<!--        o.branch_id,-->
-<!--        o.order_date,-->
-<!--        o.order_due_date,-->
-<!--        o.order_status,-->
-<!--        o.order_price,-->
-<!--        oi.part_id,-->
-<!--        oi.order_item_quantity-->
-<!--        FROM order_item oi-->
-<!--        JOIN parts p ON oi.part_id = p.part_id-->
-<!--        JOIN orders o ON oi.order_id = o.order_id-->
-<!--        JOIN branch b ON o.branch_id = b.branch_id-->
-<!--        WHERE o.order_status IN ('승인 대기');-->
-
         select *
         FROM orders
         where order_status in ('승인 대기');
-
     </select>
 
 <!--    발주 내역 -->
@@ -125,16 +107,6 @@
         order_deny = #{orderDeny}
         WHERE
         order_id = #{orderId}
-
-<!--        UPDATE order_item oi-->
-<!--        JOIN orders o ON oi.order_id = o.order_id-->
-<!--        SET-->
-<!--        o.order_status = #{orderStatus},-->
-<!--        o.order_deny = #{orderDeny},-->
-<!--        oi.order_item_status = #{orderItemStatus}-->
-<!--        WHERE-->
-<!--        oi.order_id = #{orderId}-->
-
     </update>
 
 <!--    복수 주문 처리-->
@@ -148,16 +120,4 @@
             #{id}
         </foreach>
     </update>
-
-
-<!--    <select id="findTestsWithBranchAndParts" resultType="bitc.fullstack503.server.dto.TestDTO">-->
-<!--        SELECT-->
-<!--        b.branch_id,-->
-<!--        b.branch_name,-->
-<!--        p.part_id,-->
-<!--        p.part_name-->
-<!--        FROM branch b-->
-<!--        CROSS JOIN parts p-->
-<!--    </select>-->
-
 </mapper>

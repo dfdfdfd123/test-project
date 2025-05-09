@@ -22,9 +22,6 @@ function HQMain() {
         setSelectedOrderStatus(orderStatus);
     };
 
-    // useEffect(() => {
-    //     console.log("선택된 주문현황:", selectedOrderStatus);
-    // }, [selectedOrderStatus]);
 
     const menuItems = [
         { text: "주문 확정", link: "/HQMain" },
