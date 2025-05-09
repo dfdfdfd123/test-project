@@ -59,7 +59,8 @@
         FROM order_item oi
         JOIN parts p ON oi.part_id = p.part_id
         JOIN orders o ON oi.order_id = o.order_id
-        WHERE o.order_status IN ('결제', '반려');
+        WHERE o.order_deny IN ('결제', '반려')
+        OR o.order_status = '반려';
     </select>
 
 <!--    결제 or 반려 상세 -->
@@ -100,7 +101,7 @@
         </if>
 
         <choose>
-            <when test="orderStatus == '승인' or orderStatus == '승인 대기'">
+            <when test="orderStatus == '승인' or orderStatus == '승인 대기' or orderStatus == '반려'">
                 AND o.order_status = #{orderStatus}
             </when>
             <when test="orderStatus == '결제' or orderStatus == '반려'">
