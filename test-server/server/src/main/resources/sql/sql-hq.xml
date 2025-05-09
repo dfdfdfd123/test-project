@@ -54,13 +54,14 @@
         SELECT
         o.order_id,
         o.order_date,
+        o.order_status,
         p.part_name,
         o.order_deny
         FROM order_item oi
         JOIN parts p ON oi.part_id = p.part_id
         JOIN orders o ON oi.order_id = o.order_id
         WHERE o.order_deny IN ('결제', '반려')
-        OR o.order_status = '반려';
+        OR o.order_status IN ('결제', '반려')
     </select>
 
 <!--    결제 or 반려 상세 -->

@@ -51,7 +51,8 @@ function HQSelectPanel({ onSearch }) {
       <div>
 
         <div
-            className="p-3 bg-secondary bg-opacity-10 border d-flex align-items-center gap-3"
+            // bg-opacity-10 border
+            className="p-3 bg-light  d-flex align-items-center gap-3"
             style={{flexWrap: 'nowrap', overflowX: 'auto'}}>
 
           <label className="d-flex align-items-center flex-nowrap">
@@ -104,8 +105,8 @@ function HQSelectPanel({ onSearch }) {
             </select>
           </label>
 
-
-          <button className="btn btn-secondary flex-shrink-0"  onClick={handleSearch}>조회</button>
+          {/*button className="btn btn-secondary flex-shrink-0" style={{backgroundColor: "#CFE2FF", color: "black"}}*/}
+          <button className={'btn'} style={{backgroundColor: "#CFE2FF"}} type={"button"}  onClick={handleSearch}>조회</button>
         </div>
 
       </div>
