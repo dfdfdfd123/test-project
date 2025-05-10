@@ -2,12 +2,16 @@
 
 package com.example.orderapp.min.orderdetail
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.orderapp.MainActivity
+import com.example.orderapp.R
 import com.example.orderapp.databinding.ActivityOrderDetailBinding
 
 class OrderDetailActivity : AppCompatActivity() {
@@ -31,6 +35,14 @@ class OrderDetailActivity : AppCompatActivity() {
             insets
         }
 
+        // ✅ 홈 버튼 클릭 시 MainActivity로 이동
+        val homeButton = findViewById<ImageButton>(R.id.home)
+        homeButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            startActivity(intent)
+        }
+
         // RecyclerView 설정
         adapter = OrderAdapter(orderItems)
         binding.recyclerViewItems.layoutManager = LinearLayoutManager(this)
@@ -40,10 +52,15 @@ class OrderDetailActivity : AppCompatActivity() {
         loadOrderItems()
     }
 
+
     private fun loadOrderItems() {
         repeat(3) {
             orderItems.add(OrderItem("a1011", "볼트", "엔진", "1개", "20,000", "20,000" ))
         }
         adapter.notifyDataSetChanged()
     }
+
+
 }
+
+
