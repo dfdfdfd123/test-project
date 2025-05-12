@@ -79,23 +79,22 @@
         <if test="branchId != null and branchId != ''">
             AND o.branch_id = #{branchId}
         </if>
+
         <if test="branchName != null and branchName != ''">
             AND b.branch_name = #{branchName}
         </if>
 
-        <choose>
-            <when test="orderStatus == '승인' or orderStatus == '승인 대기' or orderStatus == '반려'">
-                AND o.order_status = #{orderStatus}
-            </when>
-            <when test="orderStatus == '결제' or orderStatus == '반려'">
-                AND o.order_status = #{orderStatus}
-            </when>
-        </choose>
+        <if test="orderStatus != null and orderStatus != ''">
+            AND (
+            o.order_status = #{orderStatus}
+            OR o.order_deny = #{orderStatus}
+            )
+        </if>
 
-
-        <if test="startDate != null and endDate != null">
+        <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
             AND o.order_date BETWEEN #{startDate} AND #{endDate}
         </if>
+
     </select>
 
 <!--    단일 주문 처리-->

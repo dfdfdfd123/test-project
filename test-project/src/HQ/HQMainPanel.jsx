@@ -76,7 +76,7 @@ function HQMainPanel( { filteredRows, isFiltered }) {
             </tr>
             <tr>
               <th className="text-center align-middle" style={{width: '130px', backgroundColor: "#E3F0FF"}}>주문일자</th>
-              <th className="text-center align-middle" style={{width: '130px', backgroundColor: "#E3F0FF"}}>도착일자</th>
+              <th className="text-center align-middle" style={{width: '130px', backgroundColor: "#E3F0FF"}}>납품일자</th>
             </tr>
             </thead>
             <tbody>
@@ -102,7 +102,7 @@ function HQMainPanel( { filteredRows, isFiltered }) {
                       <td className="text-center align-middle">{row.branchId}</td>
                       <td className="text-center align-middle">{row.orderDate}</td>
                       <td className="text-center align-middle">{row.orderDueDate}</td>
-                      <td className="text-center align-middle">{row.orderPrice.toLocaleString()}</td>
+                      <td className="text-center align-middle">{row.orderPrice.toLocaleString()}원</td>
                       <td className="text-center align-middle">{row.orderStatus}</td>
                     </tr>
                 ))
@@ -115,7 +115,7 @@ function HQMainPanel( { filteredRows, isFiltered }) {
 
         {showOrderDetails && (
             <>
-            <div className="p-4 mt-3 bg-light w-100 overflow-auto">
+            <div className="p-4 mt-3 bg-light w-100 overflow-auto" style={{ maxHeight: '400px', overflowY: 'auto' }}>
               <h2 className="h5 fw-bold mt-1 mb-3">발주 내역</h2>
               <table className="table table-bordered">
                 <thead className="table-info">
@@ -161,7 +161,7 @@ function HQMainPanel( { filteredRows, isFiltered }) {
                               <td className="text-center align-middle">{row.partId}</td>
                               <td className="text-center align-middle">{row.partName}</td>
                               <td className="text-center align-middle">{row.orderItemQuantity}</td>
-                              <td className="text-center align-middle">{row.orderItemPrice.toLocaleString()}</td>
+                              <td className="text-center align-middle">{row.orderItemPrice.toLocaleString()}원</td>
                               <td className="text-center align-middle">{row.orderDate}</td>
                             </tr>
                         );
@@ -218,7 +218,7 @@ function ApprovalModal({onClose, rows, rows2, denyReason, setDenyReason}) {
 
     // 반려일 때 이유 미입력 시 알림
     if (type === '반려' && denyReason.trim() === '') {
-      alert("반려 이유를 입력하세요.");
+      alert("반려 사유를 입력하세요.");
       return;
     }
 
@@ -289,7 +289,7 @@ function ApprovalModal({onClose, rows, rows2, denyReason, setDenyReason}) {
               </table>
               <div className="form-group">
                 <label className="form-label fw-bold">반려 이유</label>
-                <input type="text" className="form-control" placeholder="무슨무슨이유로 인해 반려합니다." value={denyReason}   onChange={(e) => setDenyReason(e.target.value)} />
+                <input type="text" className="form-control" placeholder="무슨무슨사유로 인해 반려합니다." value={denyReason}   onChange={(e) => setDenyReason(e.target.value)} />
               </div>
             </div>
             <div className="modal-footer">

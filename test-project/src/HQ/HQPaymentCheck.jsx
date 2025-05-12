@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+
 function HQPaymentCheck({ filteredRows, isFiltered }) {
-
-
     const [rows, setRows] = useState([]);
     const [rows2, setRows2] = useState([]);
 
-    const [selectedOrderId, setSelectedOrderId] = useState(null);  // 행 클릭
-    const [showOrderDetails, setShowOrderDetails] = useState(false); // 상세 내역 숨기기
+    const [selectedOrderId, setSelectedOrderId] = useState(null); // 행 클릭
+    const [showOrderDetails, setShowOrderDetails] = useState(false); // 상세 내역 모달 표시
+
+    //  페이징 상태
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5;
 
 
     useEffect(() => {
-
         if (!isFiltered) {
             axios.get("http://localhost:8080/HQMain/payment")
                 .then(res => {
@@ -25,16 +27,14 @@ function HQPaymentCheck({ filteredRows, isFiltered }) {
 
             axios.get("http://localhost:8080/HQMain/paymentDetail")
                 .then(res => {
-                    console.log("서버 응답:", res.data); // 👉 콘솔 출력
+                    console.log("서버 응답:", res.data);
                     setRows2(res.data);
                 })
                 .catch(err => {
                     console.error("데이터 불러오기 실패:", err);
                 });
-
         }
     }, [isFiltered]);
-
 
     useEffect(() => {
         if (isFiltered) {
@@ -67,6 +67,25 @@ function HQPaymentCheck({ filteredRows, isFiltered }) {
         };
     });
 
+    const handleRowClick = (orderId) => {
+        setSelectedOrderId(orderId);
+        setShowOrderDetails(true);
+        setCurrentPage(1); //  모달 열릴 때 페이지 초기화
+    };
+
+    const closeModal = () => {
+        setShowOrderDetails(false);
+        setSelectedOrderId(null);
+    };
+
+    const filteredDetailRows = rows2.filter(row => row.orderId === selectedOrderId);
+
+    //  페이징 처리
+    const totalPages = Math.ceil(filteredDetailRows.length / itemsPerPage);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredDetailRows.slice(indexOfFirstItem, indexOfLastItem);
+
     return (
         <div>
             <div className="p-4 mt-3 bg-light w-100 overflow-auto">
@@ -74,10 +93,10 @@ function HQPaymentCheck({ filteredRows, isFiltered }) {
                 <table className="table table-bordered">
                     <thead className="table-info">
                     <tr>
-                        <th className="text-center align-middle" style={{backgroundColor: "#E3F0FF"}}>주문번호</th>
-                        <th className="text-center align-middle" style={{backgroundColor: "#E3F0FF"}}>주문일자</th>
-                        <th className="text-center align-middle" style={{backgroundColor: "#E3F0FF"}}>부품명</th>
-                        <th className="text-center align-middle" style={{backgroundColor: "#E3F0FF"}}>주문현황</th>
+                        <th className="text-center align-middle" style={{ backgroundColor: "#E3F0FF" }}>주문번호</th>
+                        <th className="text-center align-middle" style={{ backgroundColor: "#E3F0FF" }}>주문일자</th>
+                        <th className="text-center align-middle" style={{ backgroundColor: "#E3F0FF" }}>부품명</th>
+                        <th className="text-center align-middle" style={{ backgroundColor: "#E3F0FF" }}>주문현황</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -87,17 +106,7 @@ function HQPaymentCheck({ filteredRows, isFiltered }) {
                         </tr>
                     ) : (
                         displayRows.map((row, i) => (
-                            <tr key={i} onClick={() => {
-                                if (selectedOrderId === row.orderId) {
-                                    // 이미 선택된 경우 → 선택 해제
-                                    setSelectedOrderId(null);
-                                    setShowOrderDetails(false);
-                                } else {
-                                    // 새로 선택한 경우
-                                    setSelectedOrderId(row.orderId);
-                                    setShowOrderDetails(true);
-                                }
-                            }} style={{ cursor: 'pointer' }}>
+                            <tr key={i} onClick={() => handleRowClick(row.orderId)} style={{ cursor: 'pointer' }}>
                                 <td className="text-center align-middle">{row.orderId}</td>
                                 <td className="text-center align-middle">{row.orderDate}</td>
                                 <td className="text-center align-middle">{row.displayPartName}</td>
@@ -109,73 +118,100 @@ function HQPaymentCheck({ filteredRows, isFiltered }) {
                 </table>
             </div>
 
-            <hr/>
-
+            {/* 상세 내역 모달 */}
             {showOrderDetails && (
-                <>
-                    <div className="p-4 mt-3 bg-light w-100 overflow-auto">
-                        <h2 className="h5 fw-bold mt-1 mb-3">상세 내역</h2>
-                        <table className="table table-bordered">
-                            <thead className="table-info">
-                            <tr>
-                                <th className="text-center align-middle" rowSpan="2" style={{width: '130px', height: '60px', backgroundColor: "#E3F0FF"}}>대리점 ID
-                                </th>
-                                <th className="text-center align-middle" colSpan="2" style={{backgroundColor: "#E3F0FF"}}>부품</th>
-                                <th className="text-center align-middle" colSpan="2" style={{backgroundColor: "#E3F0FF"}}>가격</th>
-                                <th className="text-center align-middle" rowSpan="2" style={{width: '130px', backgroundColor: "#E3F0FF"}}>주문일자</th>
-                            </tr>
-                            <tr>
-                                <th className="text-center align-middle" style={{width: '130px', backgroundColor: "#E3F0FF"}}>부품 Code</th>
-                                <th className="text-center align-middle" style={{width: '130px', backgroundColor: "#E3F0FF"}}>부품명</th>
-                                <th className="text-center align-middle" style={{width: '130px', backgroundColor: "#E3F0FF"}}>수량</th>
-                                <th className="text-center align-middle" style={{width: '130px', backgroundColor: "#E3F0FF"}}>비용</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {rows2.length === 0 ? (
-                                <tr>
-                                    <td colSpan="7" className="text-center">상세 내역이 없습니다.</td>
-                                </tr>
-                            ) : (
-                                (() => {
-                                    const renderedOrderIds = new Set();
-
-                                    // selectedOrderId로 필터링
-                                    const filteredRows2 = rows2.filter(row => row.orderId === selectedOrderId);
-
-                                    return filteredRows2.map((row, i) => {
-                                        renderedOrderIds.add(row.orderId);
-
-                                        return (
-                                            <tr
-                                                key={i}
-                                                style={{ cursor: 'pointer', backgroundColor: selectedOrderId === row.orderId ? '#ffe8a1' : '' }}
-                                                onClick={() => setSelectedOrderId(row.orderId)}
-                                            >
-                                                {/* 체크박스 셀 제거 */}
-                                                <td className="text-center align-middle">{row.branchId}</td>
-                                                <td className="text-center align-middle">{row.partId}</td>
-                                                <td className="text-center align-middle">{row.partName}</td>
-                                                <td className="text-center align-middle">{row.orderItemQuantity}</td>
-                                                <td className="text-center align-middle">{row.orderItemPrice.toLocaleString()}</td>
-                                                <td className="text-center align-middle">{row.orderDate}</td>
+                <div className="modal d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+                    <div className="modal-dialog modal-xl" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header" style={{ backgroundColor: '#cfe2ff' }}>
+                                <h5 className="modal-title">상세 내역</h5>
+                                <button type="button" className="btn-close" onClick={closeModal}></button>
+                            </div>
+                            <div className="modal-body">
+                                <table className="table table-bordered">
+                                    <thead className="table-info">
+                                    <tr>
+                                        <th className="text-center align-middle" rowSpan="2"
+                                            style={{width: '130px', backgroundColor: "#E3F0FF"}}>대리점 ID
+                                        </th>
+                                        <th className="text-center align-middle" colSpan="2"
+                                            style={{backgroundColor: "#E3F0FF"}}>부품
+                                        </th>
+                                        <th className="text-center align-middle" colSpan="2"
+                                            style={{backgroundColor: "#E3F0FF"}}>가격
+                                        </th>
+                                        <th className="text-center align-middle" rowSpan="2"
+                                            style={{width: '130px', backgroundColor: "#E3F0FF"}}>주문일자
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th className="text-center align-middle"
+                                            style={{width: '130px', backgroundColor: "#E3F0FF"}}>부품 Code
+                                        </th>
+                                        <th className="text-center align-middle"
+                                            style={{width: '130px', backgroundColor: "#E3F0FF"}}>부품명
+                                        </th>
+                                        <th className="text-center align-middle"
+                                            style={{width: '130px', backgroundColor: "#E3F0FF"}}>수량
+                                        </th>
+                                        <th className="text-center align-middle"
+                                            style={{width: '130px', backgroundColor: "#E3F0FF"}}>비용
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {currentItems.length === 0 ? (
+                                        <tr>
+                                            <td colSpan="6" className="text-center">상세 내역이 없습니다.</td>
+                                        </tr>
+                                    ) : (
+                                        currentItems.map((row, i) => (
+                                            <tr key={i}>
+                                                <td className="text-center">{row.branchId}</td>
+                                                <td className="text-center">{row.partId}</td>
+                                                <td className="text-center">{row.partName}</td>
+                                                <td className="text-center">{row.orderItemQuantity}</td>
+                                                <td className="text-center">{row.orderItemPrice.toLocaleString()}원</td>
+                                                <td className="text-center">{row.orderDate}</td>
                                             </tr>
-                                        );
-                                    });
-                                })()
-                            )}
-                            </tbody>
-
-                        </table>
-
-
+                                        ))
+                                    )}
+                                    </tbody>
+                                </table>
+                                {/*  페이지네이션 컨트롤 */}
+                                {totalPages > 1 && (
+                                <div className="d-flex justify-content-center align-items-center mt-3 gap-3">
+                                    <button
+                                        className="btn btn-outline-primary"
+                                        onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                        disabled={currentPage === 1}
+                                    >
+                                        이전
+                                    </button>
+                                    <span>{currentPage} / {totalPages}</span>
+                                    <button
+                                        className="btn btn-outline-primary"
+                                        onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                        disabled={currentPage === totalPages}
+                                    >
+                                        다음
+                                    </button>
+                                </div>
+                                )}
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-primary" onClick={closeModal}>닫기</button>
+                            </div>
+                        </div>
                     </div>
-                </>
+                </div>
             )}
         </div>
-            );
+    );
 }
 
+export default HQPaymentCheck;
 
-export default HQPaymentCheck
+
+
 

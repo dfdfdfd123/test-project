@@ -13,22 +13,22 @@ function HQSelectPanel({ onSearch }) {
 
   const handleSearch = () => {
 
-    if (!branchId) {
-      alert('대리점 ID를 선택해주세요.');
-      return;
-    }
-    if (!branchName) {
-      alert('지점명을 선택해주세요.');
-      return;
-    }
-    if (!orderStatus) {
-      alert('주문현황을 선택해주세요.');
-      return;
-    }
-    if (!startDate || !endDate) {
-      alert('주문일자를 모두 선택해주세요.');
-      return;
-    }
+    // if (!branchId) {
+    //   alert('대리점 ID를 선택해주세요.');
+    //   return;
+    // }
+    // if (!branchName) {
+    //   alert('지점명을 선택해주세요.');
+    //   return;
+    // }
+    // if (!orderStatus) {
+    //   alert('주문현황을 선택해주세요.');
+    //   return;
+    // }
+    // if (!startDate || !endDate) {
+    //   alert('주문일자를 모두 선택해주세요.');
+    //   return;
+    // }
 
     axios.post('http://localhost:8080/HQMain/search', {
       branchId,
@@ -106,7 +106,7 @@ function HQSelectPanel({ onSearch }) {
           </label>
 
           {/*button className="btn btn-secondary flex-shrink-0" style={{backgroundColor: "#CFE2FF", color: "black"}}*/}
-          <button className={'btn'} style={{backgroundColor: "#CFE2FF"}} type={"button"}  onClick={handleSearch}>조회</button>
+          <button className={'btn'} style={{backgroundColor: "#CFE2FF", whiteSpace:'nowrap'}}  type={"button"}  onClick={handleSearch}>조회</button>
         </div>
 
       </div>

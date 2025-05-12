@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         val menuButton = findViewById<ImageButton>(R.id.menu)
 
         homeButton.setOnClickListener {
-            // 홈 버튼 클릭 시 처리 (예: 메인으로 이동 등)
+            // 홈 버튼 클릭 시 처리
             Log.d("csy", "홈 버튼 클릭됨")
         }
 
