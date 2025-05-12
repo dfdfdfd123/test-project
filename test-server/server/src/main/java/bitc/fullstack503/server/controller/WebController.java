@@ -77,11 +77,11 @@ public List<SearchDTO> searchOrders(@RequestBody SearchDTO dto) {
             return ResponseEntity.badRequest().body("주문 정보가 없습니다.");
         }
     }
+}
 
 
-   // 테스트
+// 테스트
 //   @GetMapping("/test")
 //   public List<TestDTO> getTestList() {
 //        return hqService.getTestList();
 //   }
-}

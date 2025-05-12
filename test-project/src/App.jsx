@@ -10,6 +10,7 @@ import Home from "./layout/main/Home.jsx";
 import Login from "./layout/Login.jsx";
 import Logis from "./layout/main/Logistics/LogisStatus/Logis.jsx";
 import Inventory from "./layout/main/Logistics/LogisManage/Inventory.jsx";
+import LoginForm from "./layout/LoginForm.jsx";
 
 function App() {
 
