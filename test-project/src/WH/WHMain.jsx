@@ -3,13 +3,18 @@ import Title from "../layout/Title.jsx";
 import WHMainPanel from "./WHMainPanel.jsx";
 import HQSidebarMenu from "../HQ/HQSidebarMenu.jsx";
 import HQTopbar from "../HQ/HQTopbar.jsx";
+import {useParams} from "react-router-dom";
 
 
 function WHMain() {
 
+    const { agencyCode } = useParams();
+
+     const MaagencyCode = agencyCode;
+
     const menuItems = [
-        { text: "물류 현황", link: "/WHMain" },
-        { text: "물류 재고관리", link: "/WHManage" },
+        { text: "물류 현황", link: `/WHMain/${MaagencyCode}` },
+        { text: "물류 재고관리", link: `/WHManage/${MaagencyCode}` },
     ];
 
 
