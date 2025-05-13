@@ -1,16 +1,32 @@
 import {Home, LogOut} from "lucide-react";
 import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
 
 function BranchTopbar({title}) {
 
 
     const navigate = useNavigate();
 
+    const [branchSupervisor, setBranchSupervisor] = useState("");
+
+    useEffect(() => {
+        const userRefId = localStorage.getItem("userRefId")
+        const supervisor = localStorage.getItem("branchSupervisor");
+        setBranchSupervisor(supervisor);
+        console.log("지점장 이름:", userRefId);
+        console.log("지점장 이름2:", supervisor);
+    }, []);
+
+
+
+
+
     const handleLogout = () => {
         // 저장된 토큰 제거
         localStorage.removeItem("token");
         localStorage.removeItem("userType");
         localStorage.removeItem("userRefId");
+        localStorage.removeItem("branchSupervisor");
 
         // 로그인 페이지로 이동
         navigate("/login");
@@ -39,7 +55,7 @@ function BranchTopbar({title}) {
 
         <div className="d-flex align-items-center gap-3">
           <span className="me-2 text-white" style={{ cursor: "pointer" }} onClick={handleLogout}>LOGOUT</span>
-          <span className="fw-bold text-white">홍길동 님</span>
+          <span className="fw-bold text-white">{branchSupervisor ? `${branchSupervisor} 님` : ""}</span>
           <Home className="me-2 cursor-pointer text-white"/>
           <LogOut className="cursor-pointer text-white"/>
         </div>

@@ -9,4 +9,8 @@ public class UserAccount {
     private String userPw;
     private String userRefId;
     private String userType;
+
+    // 추가된 필드 (JOIN 결과용)
+    private String branchSupervisor;
+    private String warehouseName;
 }

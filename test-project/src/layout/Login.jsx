@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { User, Lock } from "lucide-react";
 import axios from "axios";
 
+
 function Login() {
   const [selectedTab, setSelectedTab] = useState("Head office");
   const [userId, setUserId] = useState("");
@@ -20,16 +21,22 @@ function Login() {
 
     try {
       const response = await axios.post("http://localhost:8080/login", {
+
         userId,
         userPw,
         userType,
       });
 
       // const { token, userType, userRefId } = response.data;
-      const { token, userType: resUserType, userRefId } = response.data;
+      const { token, userType: resUserType, userRefId, branchSupervisor } = response.data;
 
       // 토큰 저장
       localStorage.setItem("token", token);
+      localStorage.setItem("userType", resUserType);
+      localStorage.setItem("userRefId", userRefId);
+      if (branchSupervisor) {
+        localStorage.setItem("branchSupervisor", branchSupervisor);
+      }
 
       // userType에 따른 페이지 이동
       // if (userType === "본사") navigate("/HQMain");
@@ -51,32 +58,6 @@ function Login() {
             <div className="text-white fw-bold mb-4" style={{position: "absolute", top: "20px", left: "20px"}}>
               Order Net
             </div>
-
-            {/* 탭 */}
-            {/*<div className="btn-group w-100 mb-4" role="group">*/}
-            {/*  {tabs.map((tab) => (*/}
-            {/*      <input*/}
-            {/*          type="radio"*/}
-            {/*          className="btn-check"*/}
-            {/*          name="options"*/}
-            {/*          id={tab}*/}
-            {/*          key={tab}*/}
-            {/*          checked={selectedTab === tab}*/}
-            {/*          onChange={() => setSelectedTab(tab)}*/}
-            {/*      />*/}
-            {/*  ))}*/}
-            {/*  {tabs.map((tab) => (*/}
-            {/*      <label*/}
-            {/*          key={tab}*/}
-            {/*          className={`btn btn-outline-secondary ${selectedTab === tab ? "active" : ""}`}*/}
-            {/*          htmlFor={tab}*/}
-            {/*          style={{ fontWeight: "bold" }}*/}
-            {/*      >*/}
-            {/*        {tab}*/}
-            {/*      </label>*/}
-            {/*  ))}*/}
-            {/*</div>*/}
-
 
             <div className="btn-group w-100 mb-4" role="group">
               {tabs.map((tab) => (

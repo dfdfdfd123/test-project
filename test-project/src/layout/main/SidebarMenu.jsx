@@ -1,9 +1,30 @@
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function SidebarMenu({ menuItems }) {
+
+    const navigate = useNavigate();
+
+    const userType = localStorage.getItem("userType");
+    const userRefId = localStorage.getItem("userRefId");
+
+    // 사용자 타입에 따른 메인 경로 설정
+    let mainLink = "/";
+    if (userType === "본사") mainLink = "/HQMain";
+    else if (userType === "대리점") mainLink = `/BranchMain/${userRefId}`;
+    else if (userType === "물류센터") mainLink = `/WHMain/${encodeURIComponent(userRefId)}`;
+
+
     return (
-        <div className="d-flex flex-column text-white vh-100 p-3" style={{ width: '250px', backgroundColor: '#343a40' }}>
-            <div className="fs-1 fw-bold mb-4 border-bottom pb-2 text-center" style={{ height: '75px', whiteSpace: 'nowrap' }}>Order Net</div>
+        <div className="d-flex flex-column text-white vh-100 p-3" style={{width: '250px', backgroundColor: '#343a40'}}>
+            {/*<div className="fs-1 fw-bold mb-4 border-bottom pb-2 text-center" style={{ height: '75px', whiteSpace: 'nowrap' }}>Order Net</div>*/}
+            {/* Order Net 클릭 시 메인으로 이동 */}
+            <div
+                className="fs-1 fw-bold mb-4 border-bottom pb-2 text-center"
+                style={{height: '75px', whiteSpace: 'nowrap', cursor: "pointer"}}
+                onClick={() => navigate(mainLink)}
+            >
+                Order Net
+            </div>
 
             <div className="mb-4">
                 <div className="small text-white text-center fs-2">2025.04.10</div>

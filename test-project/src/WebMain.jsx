@@ -40,7 +40,7 @@ function WebMain() {
                     />
                 </Route>
 
-                
+
                 <Route path={"/WHMain/:agencyCode"}>
                     <Route index element={
 
@@ -52,7 +52,7 @@ function WebMain() {
                 </Route>
 
                 <Route path="/WHManage/:agencyCode" element={<WHManage/>}/>
-                <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<LoginForm />} />
             </Routes>
         </BrowserRouter>
     );

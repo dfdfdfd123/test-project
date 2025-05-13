@@ -26,7 +26,16 @@ public class AuthController {
         System.out.println("로그인 요청 비밀번호: " + loginRequestDto.getUserPw());
         System.out.println("로그인 요청 유저타입: " + loginRequestDto.getUserType());
 
+
         UserAccount user = userService.findByUserId(loginRequestDto.getUserId());
+
+        // userType이 대리점일 때만 branchSupervisor 포함
+        String branchSupervisor = user.getUserType().equals("대리점") ? user.getBranchSupervisor() : null;
+        System.out.println("이름: " + branchSupervisor);
+
+        // userType이 물류센터일 때만 warehouseName 포함
+        String warehouseName = user.getUserType().equals("물류센터") ? user.getWarehouseName() : null;
+        System.out.println("이름: " + warehouseName);
 
 //        if (user == null || !passwordEncoder.matches(loginRequestDto.getUserPw(), user.getUserPw()) || !user.getUserType().equals(loginRequestDto.getUserType())) {
         if (user == null || !loginRequestDto.getUserPw().equals(user.getUserPw()) || !user.getUserType().equals(loginRequestDto.getUserType())) {
@@ -35,6 +44,6 @@ public class AuthController {
         }
 
         String token = jwtTokenProvider.createToken(user.getUserId(), user.getUserType());
-        return ResponseEntity.ok(new LoginResponseDto(token, user.getUserType(), user.getUserRefId()));
+        return ResponseEntity.ok(new LoginResponseDto(token, user.getUserType(), user.getUserRefId(), branchSupervisor, warehouseName));
     }
 }
